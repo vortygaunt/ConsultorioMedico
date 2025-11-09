@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1762706462 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1762706462 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.h
+
+1762705755 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\main.cpp
+	<iostream>
+
+1762706462 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.cpp
+	<iostream>
+	"Hora.h"
+
+1762706462 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.h
+
