@@ -32,6 +32,86 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Consultorio.cpp" />
+		<Unit filename="Consultorio.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConsultorioArchivo.cpp" />
+		<Unit filename="ConsultorioArchivo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConsultorioListarMenu.cpp" />
+		<Unit filename="ConsultorioListarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConsultorioManager.cpp" />
+		<Unit filename="ConsultorioManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConsultorioMenu.cpp" />
+		<Unit filename="ConsultorioMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Hora.cpp" />
+		<Unit filename="Hora.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Medico.cpp" />
+		<Unit filename="Medico.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoArchivo.cpp" />
+		<Unit filename="MedicoArchivo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoConsultaMenu.cpp" />
+		<Unit filename="MedicoConsultaMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoListarMenu.cpp" />
+		<Unit filename="MedicoListarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoManager.cpp" />
+		<Unit filename="MedicoManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoMenu.cpp" />
+		<Unit filename="MedicoMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="MedicoModificarMenu.cpp" />
+		<Unit filename="MedicoModificarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ObraSocial.cpp" />
+		<Unit filename="ObraSocial.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ObraSocialArchivo.cpp" />
+		<Unit filename="ObraSocialArchivo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ObraSocialManager.cpp" />
+		<Unit filename="ObraSocialManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ObraSocialMenu.cpp" />
+		<Unit filename="ObraSocialMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ObraSocialModificarMenu.cpp" />
+		<Unit filename="ObraSocialModificarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="funcionesGlobales.cpp" />
+		<Unit filename="funcionesGlobales.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

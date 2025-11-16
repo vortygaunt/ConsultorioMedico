@@ -1,16 +1,158 @@
 # depslib dependency file v1.0
-1762706462 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.cpp
+1763062319 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1762706462 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.h
+1763062214 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.h
 
-1762705755 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\main.cpp
+1763239197 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\main.cpp
 	<iostream>
+	"MedicoMenu.h"
+	"ConsultorioMenu.h"
+	"ObraSocialMenu.h"
 
-1762706462 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.cpp
+1762711687 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.cpp
 	<iostream>
 	"Hora.h"
 
-1762706462 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.h
+1762711687 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.h
+
+1762711687 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\funcionesglobales.cpp
+	<iostream>
+	"funcionesGlobales.h"
+
+1762711687 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\funcionesglobales.h
+	<string>
+
+1763247475 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medico.cpp
+	<iostream>
+	<cstring>
+	"Medico.h"
+
+1762882908 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medico.h
+	<string>
+	"Fecha.h"
+
+1763063146 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicoarchivo.cpp
+	<iostream>
+	"MedicoArchivo.h"
+
+1763063146 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicoarchivo.h
+	<string>
+	"Medico.h"
+
+1763250483 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomanager.cpp
+	<iostream>
+	"MedicoManager.h"
+	"Fecha.h"
+	"funcionesGlobales.h"
+
+1763060999 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomanager.h
+	"MedicoArchivo.h"
+
+1763061665 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomenu.cpp
+	<iostream>
+	"MedicoMenu.h"
+
+1763061665 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomenu.h
+	"MedicoManager.h"
+	"MedicoModificarMenu.h"
+	"MedicoConsultaMenu.h"
+	"MedicoListarMenu.h"
+
+1763238658 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomodificarmenu.cpp
+	<iostream>
+	"MedicoModificarMenu.h"
+
+1762962615 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicomodificarmenu.h
+	"MedicoManager.h"
+
+1763065141 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicoconsultamenu.cpp
+	<iostream>
+	"MedicoConsultaMenu.h"
+
+1762964960 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicoconsultamenu.h
+	"MedicoManager.h"
+
+1763149814 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicolistarmenu.cpp
+	<iostream>
+	"MedicoListarMenu.h"
+
+1763057631 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\medicolistarmenu.h
+	"MedicoManager.h"
+
+1763250627 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultorio.cpp
+	<iostream>
+	"Consultorio.h"
+
+1763073482 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultorio.h
+
+1763138469 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultorioarchivo.cpp
+	<iostream>
+	"ConsultorioArchivo.h"
+
+1763136799 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultorioarchivo.h
+	<string>
+	"Consultorio.h"
+
+1763250729 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriomanager.cpp
+	<iostream>
+	"ConsultorioManager.h"
+
+1763161927 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriomanager.h
+	"ConsultorioArchivo.h"
+
+1763161890 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriomenu.cpp
+	<iostream>
+	"ConsultorioMenu.h"
+
+1763150031 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriomenu.h
+	"ConsultorioManager.h"
+	"ConsultorioListarMenu.h"
+
+1763149954 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriolistarmenu.cpp
+	<iostream>
+	"ConsultorioListarMenu.h"
+
+1763150365 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\consultoriolistarmenu.h
+	"ConsultorioManager.h"
+
+1763250850 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocial.cpp
+	<iostream>
+	<cstring>
+	"ObraSocial.h"
+
+1763162472 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocial.h
+	<string>
+
+1763163811 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialarchivo.cpp
+	<iostream>
+	"ObraSocialArchivo.h"
+
+1763163811 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialarchivo.h
+	<string>
+	"ObraSocial.h"
+
+1763239971 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmanager.cpp
+	<iostream>
+	"ObraSocialManager.h"
+	"funcionesGlobales.h"
+
+1763239043 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmanager.h
+	"ObraSocialArchivo.h"
+
+1763239145 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmenu.cpp
+	<iostream>
+	"ObraSocialMenu.h"
+
+1763239139 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmenu.h
+	"ObraSocialManager.h"
+	"ObraSocialModificarMenu.h"
+
+1763239083 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmodificarmenu.cpp
+	<iostream>
+	"ObraSocialModificarMenu.h"
+
+1763238433 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\obrasocialmodificarmenu.h
+	"ObraSocialManager.h"
 

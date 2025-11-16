@@ -39,3 +39,27 @@ using namespace std;
     void Fecha::mostrar(){
         cout << _dia << "/" << _mes << "/" << _anio << endl;
     }
+
+    bool Fecha::operator==(const Fecha &otra) const {
+        return _dia == otra._dia && _mes == otra._mes && _anio == otra._anio;
+    }
+
+    bool Fecha::operator>(const Fecha& otra) const {
+        if (_anio < otra._anio){
+          return false;
+        }
+
+        if (_anio > otra._anio){
+            return true;
+        }
+
+        if (_mes < otra._mes){
+            return false;
+        }
+
+        if (_mes > otra._mes){
+            return true;
+        }
+
+        return _dia > otra._dia;
+    }
