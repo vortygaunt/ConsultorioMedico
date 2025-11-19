@@ -64,6 +64,8 @@ using namespace std;
     case 5:
          _obraSocialManager.consultarNombre();
         break;
+    default:
+        break;
 
         }
     }

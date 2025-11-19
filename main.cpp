@@ -1,13 +1,14 @@
 #include <iostream>
-#include "MedicoMenu.h"
-#include "ConsultorioMenu.h"
-#include "ObraSocialMenu.h"
+#include "AppMenu.h"
 
 using namespace std;
 
 int main()
 {
-ObraSocialMenu menu;
-menu.mostrar();
+
+AppMenu menuPrincipal;
+
+menuPrincipal.mostrar();
+
     return 0;
 }
