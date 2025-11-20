@@ -13,6 +13,14 @@ public:
     void backupHistoriaClinica();
     void backupEspecialidades();
 
+    void restaurarArchvioTurno();
+    void restaurarArchvioMedico();
+    void restaurarArchvioPaciente();
+    void restaurarArchvioConsultorio();
+    void restaurarArchvioObraSocial();
+    void restaurarArchvioHistoriaClinica();
+    void restaurarArchvioEspecialidades();
+
     void exportarCSVTurno();
     void exportarCSVMedico();
     void exportarCSVPaciente();

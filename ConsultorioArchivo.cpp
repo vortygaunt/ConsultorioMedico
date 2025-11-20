@@ -87,3 +87,17 @@ using namespace std;
 
         return cantidad;
     }
+
+    void ConsultorioArchivo::vaciarArchivo(){
+        FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        fclose(pFile);
+    }
+
+      bool ConsultorioArchivo::existe(){
+        FILE *pFile = fopen(_nombreArchivo.c_str(), "rb");
+        if (pFile == nullptr) {
+            return false;
+        }
+        fclose(pFile);
+        return true;
+    }

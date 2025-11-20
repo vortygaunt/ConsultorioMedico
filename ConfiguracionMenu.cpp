@@ -4,7 +4,7 @@
 using namespace std;
 
     ConfiguracionMenu::ConfiguracionMenu(){
-        _cantidadOpciones = 2;
+        _cantidadOpciones = 3;
     }
 
     void ConfiguracionMenu::mostrar(){
@@ -21,8 +21,9 @@ using namespace std;
 
     void ConfiguracionMenu::mostrarOpciones(){
         cout << "*** MENU CONFIGURACION ***" << endl;
-        cout << "1. CREAR COPIA DE SEGURIDAD" << endl;
-        cout << "2. EXPORTAR DATOS" << endl;
+        cout << "1. CREAR BACKUP" << endl;
+        cout << "2. RESTAURAR ARCHIVO" << endl;
+        cout << "3. EXPORTAR DATOS" << endl;
         cout << "**************************" << endl;
         cout << "0 . VOLVER" << endl;
         cout << "**************************" << endl;
@@ -51,7 +52,10 @@ using namespace std;
         _configuracionMenuBackups.mostrar();
         break;
     case 2:
-        _configuracionMenuExportarCSV.mostrar();
+        _configuracionMenuRestaurar.mostrar();
+        break;
+    case 3:
+         _configuracionMenuExportarCSV.mostrar();
         break;
         }
     }

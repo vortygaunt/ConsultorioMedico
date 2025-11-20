@@ -32,6 +32,30 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AppMenu.cpp" />
+		<Unit filename="AppMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConfiguracionManager.cpp" />
+		<Unit filename="ConfiguracionManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConfiguracionMenu.cpp" />
+		<Unit filename="ConfiguracionMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConfiguracionMenuBackups.cpp" />
+		<Unit filename="ConfiguracionMenuBackups.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConfiguracionMenuExportarCSV.cpp" />
+		<Unit filename="ConfiguracionMenuExportarCSV.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ConfiguracionMenuRestaurar.cpp" />
+		<Unit filename="ConfiguracionMenuRestaurar.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Consultorio.cpp" />
 		<Unit filename="Consultorio.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -106,6 +130,14 @@
 		</Unit>
 		<Unit filename="ObraSocialModificarMenu.cpp" />
 		<Unit filename="ObraSocialModificarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ReporteManager.cpp" />
+		<Unit filename="ReporteManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ReporteMenu.cpp" />
+		<Unit filename="ReporteMenu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="funcionesGlobales.cpp" />

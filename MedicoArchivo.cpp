@@ -91,3 +91,17 @@ using namespace std;
     int MedicoArchivo::getnuevoID(){
         return getCantidadRegistro() + 1;
     }
+
+    void MedicoArchivo::vaciarArchivo() {
+        FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        fclose(pFile);
+    }
+
+    bool MedicoArchivo::existe(){
+        FILE *pFile = fopen(_nombreArchivo.c_str(), "rb");
+        if (pFile == nullptr) {
+            return false;
+        }
+        fclose(pFile);
+        return true;
+    }

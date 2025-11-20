@@ -11,7 +11,8 @@ public:
     bool modificar(int pos, Consultorio &registro);
     bool eliminar(int pos);
     int getCantidadRegistro();
-
+    void vaciarArchivo();
+    bool existe();
 private:
     std::string _nombreArchivo;
 };

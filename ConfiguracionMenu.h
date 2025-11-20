@@ -1,5 +1,6 @@
 #pragma once
 #include "ConfiguracionMenuBackups.h"
+#include "ConfiguracionMenuRestaurar.h"
 #include "ConfiguracionMenuExportarCSV.h"
 
 class ConfiguracionMenu{
@@ -14,6 +15,7 @@ protected:
     void ejecutarOpciones(int opcion);
 
     ConfiguracionMenuBackups _configuracionMenuBackups;
+    ConfiguracionMenuRestaurar _configuracionMenuRestaurar;
     ConfiguracionMenuExportarCSV _configuracionMenuExportarCSV;
 private:
     int _cantidadOpciones;
