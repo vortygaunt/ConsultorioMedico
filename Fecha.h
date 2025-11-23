@@ -14,8 +14,9 @@ public:
 
     void cargar();
     void mostrar();
+    bool esBiciesto(int anio);
     bool operator==(const Fecha &otra) const;
-    bool operator>(const Fecha& otra) const;
+    bool operator>(const Fecha &otra) const;
 private:
     int _dia;
     int _mes;

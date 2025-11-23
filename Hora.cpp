@@ -9,10 +9,14 @@ using namespace std;
     }
 
     void Hora::setHora(int hora){
-        _hora = hora;
+        if(hora >= 0 && hora <= 23){
+            _hora = hora;
+        }
     }
     void Hora::setMinuto(int minuto){
-        _minuto = minuto;
+        if(minuto >= 0 && minuto <= 59){
+            _minuto = minuto;
+        }
     }
 
     int Hora::getHora(){
@@ -23,11 +27,25 @@ using namespace std;
     }
 
     void Hora::cargar(){
+        int hora, minuto;
+
         cout << "Ingrese la hora: ";
-        cin >> _hora;
+        cin >> hora;
         cout << "Ingrese el minuto: ";
-        cin >> _minuto;
+        cin >> minuto;
+
+        setHora(hora);
+        setMinuto(minuto);
     }
+
     void Hora::mostrar(){
-        cout << _hora << ":" << _minuto << endl;
+        if(_hora < 10){
+            cout << "0";
+        }
+        cout << _hora << ":";
+
+        if(_minuto < 10){
+            cout << "0";
+        }
+        cout << _minuto << endl;
     }

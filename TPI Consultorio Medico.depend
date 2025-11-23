@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1763062319 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.cpp
+1763835475 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1763062214 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.h
+1763832766 c:\users\admin\desktop\progra 2.2\tpi consultorio medico\fecha.h
 
 1763575478 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\main.cpp
 	<iostream>
 	"AppMenu.h"
 
-1762711687 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.cpp
+1763835857 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\hora.cpp
 	<iostream>
 	"Hora.h"
 
@@ -182,7 +182,7 @@
 	<iostream>
 	"ReporteMenu.h"
 
-1763673385 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\configuracionmanager.cpp
+1763846026 source:c:\users\admin\desktop\progra 2.2\tpi consultorio medico\configuracionmanager.cpp
 	<iostream>
 	"ConfiguracionManager.h"
 

@@ -204,7 +204,46 @@ using namespace std;
     }
 
     void ConfiguracionManager::exportarCSVMedico(){
+        FILE *exportar = fopen("csv/medicos.csv", "wt");
+        if(exportar == nullptr){
+            cout << "No se pudo crear el archivo CSV." << endl;
+            return;
+        }
 
+        int cantidad = _repoMedico.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros para exportar." << endl;
+            fclose(exportar);
+            return;
+        }
+
+        fprintf(exportar, "ID,DNI,Nombre,Apellido,Telefono,e-mail,Matricula,CodEspecialidad,FechaInicio,Estado\n");
+
+        Medico reg;
+
+        for(int i=0; i<cantidad; i++){
+            reg = _repoMedico.leer(i);
+
+             fprintf(exportar, "%d,%s,%s,%s,%s,%s,%s,%d,%d/%d/%d,%d\n",
+            reg.getIdMedico(),
+            reg.getDniMedico().c_str(),
+            reg.getNombreMedico().c_str(),
+            reg.getApellidoMedico().c_str(),
+            reg.getTelefonoMedico().c_str(),
+            reg.getEmailMedico().c_str(),
+            reg.getMatricula().c_str(),
+            reg.getCodigoEspecialidad(),
+            reg.getFechaInicio().getDia(),
+            reg.getFechaInicio().getMes(),
+            reg.getFechaInicio().getAnio(),
+            reg.getEstado()
+        );
+
+        }
+
+        fclose(exportar);
+
+        cout << "Archivo CSV exportado correctamente." << endl;
     }
 
     void ConfiguracionManager::exportarCSVPaciente(){
@@ -212,11 +251,75 @@ using namespace std;
     }
 
     void ConfiguracionManager::exportarCSVConsultorio(){
+        FILE *exportar = fopen("csv/consultorios.csv", "wt");
+        if(exportar == nullptr){
+            cout << "No se pudo crear el archivo CSV." << endl;
+            return;
+        }
 
+        int cantidad = _repoConsultorio.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros para exportar." << endl;
+            fclose(exportar);
+            return;
+        }
+
+        fprintf(exportar, "Numero,Piso,CodEspecialidad,Ocupado,IdMedico,Estado\n");
+
+        Consultorio reg;
+
+        for(int i=0; i<cantidad; i++){
+            reg = _repoConsultorio.leer(i);
+
+             fprintf(exportar, "%d,%d,%d,%d,%d,%d\n",
+            reg.getNumeroConsultorio(),
+            reg.getPisoConsultorio(),
+            reg.getCodigoEspecialidad(),
+            reg.getOcupado(),
+            reg.getIdMedico(),
+            reg.getEstado()
+            );
+
+        }
+
+        fclose(exportar);
+
+        cout << "Archivo CSV exportado correctamente." << endl;
     }
 
     void ConfiguracionManager::exportarCSVObraSocial(){
+        FILE *exportar = fopen("csv/obrasSociales.csv", "wt");
+        if(exportar == nullptr){
+            cout << "No se pudo crear el archivo CSV." << endl;
+            return;
+        }
 
+        int cantidad = _repoObrasocial.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros para exportar." << endl;
+            fclose(exportar);
+            return;
+        }
+
+        fprintf(exportar, "ID,Nombre,Telefono,Estado\n");
+
+        ObraSocial reg;
+
+        for(int i=0; i<cantidad; i++){
+            reg = _repoObrasocial.leer(i);
+
+             fprintf(exportar, "%d,%s,%s,%d\n",
+            reg.getIdObraSocial(),
+            reg.getNombre().c_str(),
+            reg.getTelefonoObraSocial().c_str(),
+            reg.getEstado()
+        );
+
+        }
+
+        fclose(exportar);
+
+        cout << "Archivo CSV exportado correctamente." << endl;
     }
 
     void ConfiguracionManager::exportarCSVHistoriaClinica(){
