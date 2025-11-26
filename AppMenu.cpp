@@ -7,17 +7,6 @@ using namespace std;
         _cantidadOpciones = 9;
     }
 
-    void AppMenu::mostrar(){
-        int opcion;
-
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void AppMenu::mostrarOpciones(){
         cout << "**** MENU PRINCIPAL ****" << endl;
@@ -35,33 +24,18 @@ using namespace std;
         cout << "*************************" << endl;
     }
 
-    int AppMenu::seleccionarOpciones(){
-        int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opcion: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opcion: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void AppMenu::ejecutarOpciones(int opcion){
         switch(opcion){
     case 1:
-
+        _turnoMenu.mostrar();
         break;
     case 2:
         _medicoMenu.mostrar();
         break;
     case 3:
-
+        _pacienteMenu.mostrar();
         break;
     case 4:
         _consultorioMenu.mostrar();
@@ -70,10 +44,10 @@ using namespace std;
          _obraSocialMenu.mostrar();
         break;
     case 6:
-
+        _historiaClinicaMenu.mostrar();
         break;
     case 7:
-
+        _especialidadMenu.mostrar();
         break;
     case 8:
         _reporteMenu.mostrar();

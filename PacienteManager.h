@@ -25,5 +25,4 @@ public:
     void listarFechaNacimiento();
     void listarObraSocial();
 
-    std::string cargarCadena();
 };

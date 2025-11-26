@@ -7,17 +7,6 @@ using namespace std;
         _cantidadOpciones = 5;
     }
 
-    void ObraSocialMenu::mostrar(){
-        int opcion;
-
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void ObraSocialMenu::mostrarOpciones(){
         cout << "****** MENU OBRA SOCIAL ******" << endl;
@@ -30,22 +19,6 @@ using namespace std;
         cout << "******************************" << endl;
     }
 
-    int ObraSocialMenu::seleccionarOpciones(){
-        int opcion;
-
-        mostrarOpciones();
-
-        cout << "Seleccionar opción: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opción: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void ObraSocialMenu::ejecutarOpciones(int opcion){
          switch(opcion){

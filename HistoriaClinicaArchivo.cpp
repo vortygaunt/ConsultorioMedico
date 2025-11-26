@@ -79,3 +79,16 @@ int HistoriaClinicaArchivo::getNuevoID(){
     return getCantidadRegistro() + 1;
     }
 
+void HistoriaClinicaArchivo::vaciarArchivo() {
+    FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+    fclose(pFile);
+}
+
+bool HistoriaClinicaArchivo::existe(){
+    FILE *pFile = fopen(_nombreArchivo.c_str(), "rb");
+    if (pFile == nullptr) {
+        return false;
+    }
+    fclose(pFile);
+    return true;
+}

@@ -1,26 +1,15 @@
 #include <iostream>
 #include "HistoriaClinicaManager.h"
+#include "funcionesGlobales.h"
 
 using namespace std;
 
-historiaClinicaManager::historiaClinicaManager(){
-}
-std::string historiaClinicaManager::cargarCadena()
-{
-  std::string texto;
-
-  if(std::cin.peek() == '\n')
-  {
-    std::cin.ignore();
-  }
-
-  std::getline(std::cin, texto);
-
-  return texto;
+HistoriaClinicaManager::HistoriaClinicaManager(){
 }
 
-void historiaClinicaManager::cargar()
+void HistoriaClinicaManager::cargar()
 {
+    bool valido;
     int id;
     string dniPaciente;
     string dniMedico;
@@ -32,11 +21,27 @@ void historiaClinicaManager::cargar()
 
     id = _repo.getNuevoID();
 
-    cout << "DNI DEL PACIENTE: ";
+    do{
+    cout << "DNI del paciente: ";
     dniPaciente = cargarCadena();
 
-    cout << "DNI DEL MEDICO ";
+    valido = soloDigitos(dniPaciente);
+    if(!valido){
+        cout << "DNI invalido." << endl;
+    }
+
+    }while(!valido);
+
+    do{
+    cout << "DNI del medico: ";
     dniMedico = cargarCadena();
+
+    valido = soloDigitos(dniMedico);
+    if(!valido){
+        cout << "DNI invalido." << endl;
+    }
+
+    }while(!valido);
 
     cout << "Fecha de Inicio: ";
     fecha.cargar();
@@ -50,10 +55,12 @@ void historiaClinicaManager::cargar()
     cout << "Tratamiento: ";
     tratamiento = cargarCadena();
 
-    cout << "Codigo Obra Social: ";
-    cin >> idObraSocial;
-    cin.ignore();
-
+    do{
+        idObraSocial = leerEntero( "Codigo Obra Social: ");
+        if(idObraSocial <= 0){
+            cout << "ID invalido." << endl;
+        }
+    }while(idObraSocial <= 0);
 
 
     if(_repo.guardar(HistoriaClinica(id,dniPaciente,dniMedico,fecha,diagnostico,observaciones,tratamiento,idObraSocial,true)))
@@ -64,8 +71,11 @@ void historiaClinicaManager::cargar()
     }
 }
 
-int historiaClinicaManager::buscarPosPorDni(const std::string &dniBuscado) {
+int HistoriaClinicaManager::buscarPosPorDni(const std::string &dniBuscado) {
     int cantidad = _repo.getCantidadRegistro();
+    if(cantidad == 0){
+        return -1;
+    }
 
     for (int i = 0; i < cantidad; i++) {
         HistoriaClinica reg = _repo.leer(i);
@@ -78,11 +88,20 @@ int historiaClinicaManager::buscarPosPorDni(const std::string &dniBuscado) {
     return -1;  // no encontrado
 }
 
-void historiaClinicaManager::eliminarHistoriaClinica()
+void HistoriaClinicaManager::eliminarHistoriaClinica()
 {
     string dni;
-    cout << "INGRESE DNI DEL PACIENTE A ELIMINAR: ";
-    cin >> dni;
+    bool valido;
+    do{
+        cout << "Ingrese el DNI del paciente a eliminar: ";
+        cin >> dni;
+
+        valido = soloDigitos(dni);
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
+
+    }while(!valido);
 
     int pos = buscarPosPorDni(dni);
 
@@ -93,15 +112,15 @@ void historiaClinicaManager::eliminarHistoriaClinica()
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "HISTORIA CLINICA ENCONTRADA: ";
+    cout << "Historia clinica encontrada: ";
     historia.mostrar();
 
 
     char confirmar;
-    cout << "¿DESEA ELIMINAR ESTE PACIENTE? (S/N): ";
+    cout << "¿Desea eliminar este paciente? (S/N): ";
     cin >> confirmar;
 
-    if (confirmar != 'S' && confirmar != 's') {
+    if (confirmar != 'S' && confirmar != 'N') {
         cout << "Operación cancelada.";
         return;
     }
@@ -119,11 +138,22 @@ void historiaClinicaManager::eliminarHistoriaClinica()
 }
 
 
-void historiaClinicaManager::modificarDiagnostico()
+void HistoriaClinicaManager::modificarDiagnostico()
 {
     string dniBuscado;
-    cout << "INGRESE DNI DEL PACIENTE: ";
-    cin >> dniBuscado;
+    string nuevoDiagnostico;
+    bool valido;
+
+    do{
+        cout << "Ingrese el DNI del paciente: ";
+        dniBuscado = cargarCadena();
+
+        valido = soloDigitos(dniBuscado);
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
+
+    }while(!valido);
 
     int pos = buscarPosPorDni(dniBuscado);
 
@@ -135,13 +165,11 @@ void historiaClinicaManager::modificarDiagnostico()
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "PACIENTE ENCONTRADO: ";
+    cout << "Paciente encontrado: ";
     historia.mostrar();
 
-
-    string nuevoDiagnostico;
-    cout << "INGRESE NUEVO DIAGNOSTICO: ";
-    cin >> nuevoDiagnostico;
+    cout << "Ingrese nuevo diagnostico: ";
+    nuevoDiagnostico = cargarCadena();
 
     historia.setDiagnostico(nuevoDiagnostico);
 
@@ -153,11 +181,22 @@ void historiaClinicaManager::modificarDiagnostico()
     }
 }
 
-void historiaClinicaManager::modificarObservaciones()
+void HistoriaClinicaManager::modificarObservaciones()
 {
     string dniBuscado;
-    cout << "INGRESE DNI DEL PACIENTE: ";
-    cin >> dniBuscado;
+    string nuevasObservaciones;
+    bool valido;
+
+    do{
+        cout << "Ingrese el DNI del paciente: ";
+        dniBuscado = cargarCadena();
+
+        valido = soloDigitos(dniBuscado);
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
+
+    }while(!valido);
 
 
     int pos = buscarPosPorDni(dniBuscado);
@@ -170,12 +209,11 @@ void historiaClinicaManager::modificarObservaciones()
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "PACIENTE ENCONTRADO: ";
+    cout << "Paciente encontrado: ";
     historia.mostrar();
 
 
-    string nuevasObservaciones;
-    cout << "INGRESE NUEVAS OBSERVACIONES: "; //sobreescribe las observaciones
+    cout << "Ingrese las nuevas observaciones: "; //sobreescribe las observaciones
     nuevasObservaciones = cargarCadena();
 
     historia.setObservaciones(nuevasObservaciones);
@@ -188,11 +226,22 @@ void historiaClinicaManager::modificarObservaciones()
     }
 }
 
-void historiaClinicaManager::modificarTratamiento()
+void HistoriaClinicaManager::modificarTratamiento()
 {
     string dniBuscado;
-    cout << "INGRESE DNI DEL PACIENTE: ";
-    cin >> dniBuscado;
+    string nuevoTratamiento;
+    bool valido;
+
+     do{
+        cout << "Ingrese el DNI del paciente: ";
+        dniBuscado = cargarCadena();
+
+        valido = soloDigitos(dniBuscado);
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
+
+    }while(!valido);
 
 
     int pos = buscarPosPorDni(dniBuscado);
@@ -204,13 +253,11 @@ void historiaClinicaManager::modificarTratamiento()
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "PACIENTE ENCONTRADO: ";
+    cout << "Paciente encontrado: ";
     historia.mostrar();
 
-
-    string nuevoTratamiento;
-    cout << "INGRESE NUEVO TRATAMIENTO: ";
-    cin >> nuevoTratamiento;
+    cout << "Ingrese nuevo tratamiento: ";
+    nuevoTratamiento = cargarCadena();
 
     historia.setTratamiento(nuevoTratamiento);
 
@@ -222,11 +269,21 @@ void historiaClinicaManager::modificarTratamiento()
     }
 }
 
-void historiaClinicaManager::consultarDniPaciente()
+void HistoriaClinicaManager::consultarDniPaciente()
 {
     string dniBuscado;
-    cout << "INGRESE DNI: ";
-    cin >> dniBuscado;
+    bool valido;
+
+      do{
+        cout << "Ingrese el DNI del paciente: ";
+        dniBuscado = cargarCadena();
+
+        valido = soloDigitos(dniBuscado);
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
+
+    }while(!valido);
 
     int pos = buscarPosPorDni(dniBuscado);
 
@@ -241,7 +298,7 @@ void historiaClinicaManager::consultarDniPaciente()
     reg.mostrar();
 }
 
-void historiaClinicaManager::consultarFechaHC()
+void HistoriaClinicaManager::consultarFechaHC()
 {
     Fecha fecha;
 
@@ -276,13 +333,20 @@ void historiaClinicaManager::consultarFechaHC()
     }
 }
 
-void historiaClinicaManager::consultarDiagnostico()
+void HistoriaClinicaManager::consultarDiagnostico()
 {
     string diagnosticoBuscado;
+
+    int cantidad = _repo.getCantidadRegistro();
+    if(cantidad == 0){
+        cout << "No hay registros en el archivo." << endl;
+        return;
+    }
+
     cout << "INGRESE DIAGNOSTICO A BUSCAR: ";
     cin >> diagnosticoBuscado;
 
-    int cantidad = _repo.getCantidadRegistro();
+
     bool encontrado = false;
 
     for (int i = 0; i < cantidad; i++) {

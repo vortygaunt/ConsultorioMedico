@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Fecha.h"
+#include "funcionesGlobales.h"
 
 using namespace std;
 
@@ -51,12 +52,29 @@ using namespace std;
 
     void Fecha::cargar(){
         int dia, mes, anio;
-        cout << "Ingrese el dia: ";
-        cin >> dia;
-        cout << "Ingrese el mes: ";
-        cin >> mes;
-        cout << "Ingrese el anio: ";
-        cin >> anio;
+        do{
+        dia = leerEntero("Ingrese el dia: ");
+        if(dia <= 0){
+            cout << "Dia invalido." << endl;
+        }
+
+        }while(dia <= 0);
+
+        do{
+        mes = leerEntero("Ingrese el mes: ");
+        if(mes < 0){
+            cout << "Mes invalido." << endl;
+        }
+
+        }while(mes <= 0);
+
+        do{
+        anio = leerEntero("Ingrese el anio: ");
+        if(anio <= 0){
+            cout << "Anio invalido." << endl;
+        }
+
+        }while(anio <= 0);
 
         setAnio(anio);
         setMes(mes);

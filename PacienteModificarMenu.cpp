@@ -4,20 +4,9 @@
 using namespace std;
 
 PacienteModificarMenu::PacienteModificarMenu(){
-    _opciones = 5;
+    _cantidadOpciones = 5;
 }
 
-void PacienteModificarMenu::mostrar(){
-  int opcion;
-
-  do{
-    system("cls");
-    opcion = seleccionarOpciones();
-    system("cls");
-    ejecutarOpcion(opcion);
-    system("pause");
-  }while(opcion != 0);
-}
 
 void PacienteModificarMenu::mostrarOpciones(){
     cout << "============================="<<endl;
@@ -31,22 +20,8 @@ void PacienteModificarMenu::mostrarOpciones(){
     cout << "-----------------------------"<<endl;
 }
 
-int PacienteModificarMenu::seleccionarOpciones(){
-    int opcion;
-    mostrarOpciones();
-    cout<<"Opcion: ";
-    cin>> opcion;
 
-    while(opcion < 0 || opcion > _opciones){
-      cout << "opcion incorrecta"<<endl;
-      cout << "Opcion: ";
-      cin >> opcion;
-    }
-
-    return opcion;
-}
-
-void PacienteModificarMenu::ejecutarOpcion(int opcion){
+void PacienteModificarMenu::ejecutarOpciones(int opcion){
     switch(opcion){
     case 1:
         _pacienteManager.modificarTelefono();

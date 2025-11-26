@@ -76,10 +76,38 @@
 		<Unit filename="ConsultorioMenu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Especialidad.cpp" />
+		<Unit filename="Especialidad.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="EspecialidadArchivo.cpp" />
+		<Unit filename="EspecialidadArchivo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="EspecialidadManager.cpp" />
+		<Unit filename="EspecialidadManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="EspecialidadMenu.cpp" />
+		<Unit filename="EspecialidadMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="HistoriaClinica.cpp" />
+		<Unit filename="HistoriaClinica.h" />
+		<Unit filename="HistoriaClinicaArchivo.cpp" />
+		<Unit filename="HistoriaClinicaArchivo.h" />
+		<Unit filename="HistoriaClinicaManager.cpp" />
+		<Unit filename="HistoriaClinicaManager.h" />
+		<Unit filename="HistoriaClinicaMenu.cpp" />
+		<Unit filename="HistoriaClinicaMenu.h" />
+		<Unit filename="HistoriaClinicaMenuConsulta.cpp" />
+		<Unit filename="HistoriaClinicaMenuConsulta.h" />
+		<Unit filename="HistoriaClinicaMenuModificar.cpp" />
+		<Unit filename="HistoriaClinicaMenuModificar.h" />
 		<Unit filename="Hora.cpp" />
 		<Unit filename="Hora.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -112,6 +140,10 @@
 		<Unit filename="MedicoModificarMenu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="ObraSocial.cpp" />
 		<Unit filename="ObraSocial.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -132,12 +164,56 @@
 		<Unit filename="ObraSocialModificarMenu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Paciente.cpp" />
+		<Unit filename="Paciente.h" />
+		<Unit filename="PacienteArchivo.cpp" />
+		<Unit filename="PacienteArchivo.h" />
+		<Unit filename="PacienteDireccion.cpp" />
+		<Unit filename="PacienteDireccion.h" />
+		<Unit filename="PacienteManager.cpp" />
+		<Unit filename="PacienteManager.h" />
+		<Unit filename="PacienteMenu.cpp" />
+		<Unit filename="PacienteMenu.h" />
+		<Unit filename="PacienteMenuConsulta.cpp" />
+		<Unit filename="PacienteMenuConsulta.h" />
+		<Unit filename="PacienteMenuListar.cpp" />
+		<Unit filename="PacienteMenuListar.h" />
+		<Unit filename="PacienteModificarMenu.cpp" />
+		<Unit filename="PacienteModificarMenu.h" />
 		<Unit filename="ReporteManager.cpp" />
 		<Unit filename="ReporteManager.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="ReporteMenu.cpp" />
 		<Unit filename="ReporteMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Turno.cpp" />
+		<Unit filename="Turno.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoArchivo.cpp" />
+		<Unit filename="TurnoArchivo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoConsultarMenu.cpp" />
+		<Unit filename="TurnoConsultarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoListarMenu.cpp" />
+		<Unit filename="TurnoListarMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoManager.cpp" />
+		<Unit filename="TurnoManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoMenu.cpp" />
+		<Unit filename="TurnoMenu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="TurnoModificarMenu.cpp" />
+		<Unit filename="TurnoModificarMenu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="funcionesGlobales.cpp" />

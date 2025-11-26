@@ -5,20 +5,9 @@
 using namespace std;
 
 HistoriaClinicaMenu::HistoriaClinicaMenu(){
-    _opciones = 5;
+    _cantidadOpciones = 4;
 }
 
-void HistoriaClinicaMenu::mostrar(){
-  int opcion;
-
-  do{
-    system("cls");
-    opcion = seleccionarOpciones();
-    system("cls");
-    ejecutarOpcion(opcion);
-    system("pause");
-  }while(opcion != 0);
-}
 
 void HistoriaClinicaMenu::mostrarOpciones(){
     cout << "============================="<<endl;
@@ -32,22 +21,9 @@ void HistoriaClinicaMenu::mostrarOpciones(){
     cout << "-----------------------------"<<endl;
 }
 
-int HistoriaClinicaMenu::seleccionarOpciones(){
-    int opcion;
-    mostrarOpciones();
-    cout<<"Opcion: ";
-    cin>> opcion;
 
-    while(opcion < 0 || opcion > _opciones){
-      cout << "opcion incorrecta"<<endl;
-      cout << "Opcion: ";
-      cin >> opcion;
-    }
 
-    return opcion;
-}
-
-void HistoriaClinicaMenu::ejecutarOpcion(int opcion){
+void HistoriaClinicaMenu::ejecutarOpciones(int opcion){
     switch(opcion){
     case 1:
         historiaManager.cargar();

@@ -3,10 +3,15 @@
 
 class ObraSocialManager{
 public:
+    ObraSocialManager();
+
     void cargar();
     void bajaLogica();
+
     void listadoOrdenNombre();
+
     void consultarNombre();
+
     void modificarNombre();
     void modificarTelefono();
 private:

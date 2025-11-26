@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Hora.h"
+#include "funcionesGlobales.h"
 
 using namespace std;
 
@@ -29,10 +30,21 @@ using namespace std;
     void Hora::cargar(){
         int hora, minuto;
 
-        cout << "Ingrese la hora: ";
-        cin >> hora;
-        cout << "Ingrese el minuto: ";
-        cin >> minuto;
+        do{
+        hora = leerEntero("Ingrese la hora: ");
+        if(hora < 0){
+            cout << "Hora invalida." << endl;
+        }
+
+        }while(hora < 0);
+
+        do{
+        minuto = leerEntero("Ingrese el minuto: ");
+        if(minuto < 0){
+            cout << "Minuto invalido." << endl;
+        }
+
+        }while(minuto < 0);
 
         setHora(hora);
         setMinuto(minuto);

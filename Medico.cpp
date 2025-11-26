@@ -34,21 +34,27 @@ using namespace std;
     }
     void Medico::setDniMedico(string dniMedico){
         strncpy(_dniMedico, dniMedico.c_str(), 11);
+        _dniMedico[11] = '\0';
     }
     void Medico::setNombreMedico(string nombreMedico){
         strncpy(_nombreMedico, nombreMedico.c_str(), 29);
+        _nombreMedico[29] = '\0';
     }
     void Medico::setApellidoMedico(string apellidoMedico){
         strncpy(_apellidoMedico, apellidoMedico.c_str(), 29);
+        _apellidoMedico[29] = '\0';
     }
     void Medico::setTelefonoMedico(string telefonoMedico){
         strncpy(_telefonoMedico, telefonoMedico.c_str(), 19);
+        _telefonoMedico[19] = '\0';
     }
     void Medico::setEmailMedico(string emailMedico){
         strncpy(_emailMedico, emailMedico.c_str(), 39);
+        _emailMedico[39] = '\0';
     }
     void Medico::setMatricula(string matricula){
         strncpy(_matricula, matricula.c_str(), 14);
+        _matricula[14] = '\0';
     }
     void Medico::setCodigoEspecialidad(int codigoEspecialidad){
          if(codigoEspecialidad > 0){
@@ -104,4 +110,5 @@ using namespace std;
         cout << "Codigo de Especialidad: " << _codigoEspecialidad << endl;
         cout << "Fecha de inicio: ";
         _fechaInicio.mostrar();
+        cout << "---------------------------" << endl;
     }

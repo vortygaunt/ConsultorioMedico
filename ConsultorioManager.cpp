@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ConsultorioManager.h"
+#include "funcionesGlobales.h"
 
 using namespace std;
 
@@ -11,24 +12,47 @@ using namespace std;
         int numeroConsultorio;
         int pisoConsultorio;
         int codigoEspecialidad;
-        bool ocupado;
+        int ocupado;
         int idMedico = 0;
 
-        cout << "Ingrese el numero de consultorio: ";
-        cin >> numeroConsultorio;
+        do{
+            numeroConsultorio = leerEntero("Ingrese el numero de consultorio: ");
 
-        cout << "Ingrese el piso del consultorio: ";
-        cin >> pisoConsultorio;
+            if(numeroConsultorio <= 0){
+                cout << "Numero de consultorio invalido." << endl;
+            }
 
-        cout << "Ingrese el codigo de especialidad: ";
-        cin >> codigoEspecialidad;
+        }while(numeroConsultorio <= 0);
 
-        cout << "Esta ocupado? 1-si 0-no: ";
-        cin >> ocupado;
+        do{
+            pisoConsultorio = leerEntero("Ingrese el piso del consultorio: ");
+
+            if(pisoConsultorio <= 0){
+                cout << "Piso del consultorio invalido." << endl;
+            }
+
+        }while(pisoConsultorio <= 0);
+
+        do{
+            codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad: ");
+
+            if(codigoEspecialidad <= 0){
+                cout << "Codigo de especialidad invalido." << endl;
+            }
+
+        }while(codigoEspecialidad <= 0);
+
+        do{
+            ocupado = leerEntero("Esta ocupado? 1-si 0-no: ");
+
+            if(ocupado != 0 && ocupado != 1){
+                cout << "Ingrese 1 o 0." << endl;
+            }
+
+        }while(ocupado != 0 && ocupado != 1);
 
         if(ocupado){
-            cout << "Ingrese el ID del medico que esta ocupando el consultorio: ";
-            cin >> idMedico;
+            idMedico = leerEntero("Ingrese el ID del medico que esta ocupando el consultorio: ");
         }
 
         if(_repo.guardar(Consultorio(numeroConsultorio, pisoConsultorio, codigoEspecialidad, ocupado, idMedico, true))){
@@ -42,10 +66,17 @@ using namespace std;
         int cantidad, numeroConsultorio, pos = -1;
         Consultorio registro;
 
-        cout << "Ingrese el numero del consultorio que desea dar de baja: ";
-        cin >> numeroConsultorio;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros cargados." << endl;
+            return;
+        }
+
+        numeroConsultorio = leerEntero("Ingrese el numero del consultorio que desea dar de baja: ");
+        if(numeroConsultorio <= 0){
+            cout << "Numero de consultorio invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -152,13 +183,15 @@ using namespace std;
         int cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese el numero de consultorio: ";
-        cin >> numeroConsultorio;
-
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
             cout << "No hay registros cargados." << endl;
+            return;
+        }
+
+        numeroConsultorio = leerEntero("Ingrese el numero del consultorio que desea consultar: ");
+        if(numeroConsultorio <= 0){
+            cout << "Numero de consultorio invalido." << endl;
             return;
         }
 
@@ -181,32 +214,47 @@ using namespace std;
         int codigoEspecialidad, numeroConsultorio, cantidad, pos = -1;
         Consultorio registro;
 
-        cout << "Ingrese el numero del consultorio: ";
-        cin >> numeroConsultorio;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros cargados." << endl;
+            return;
+        }
+
+        numeroConsultorio = leerEntero("Ingrese el numero del consultorio: ");
+        if(numeroConsultorio <= 0){
+            cout << "Numero de consultorio invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
-            if(numeroConsultorio == registro.getNumeroConsultorio() && registro.getEstado()){
-                cout << "Ingrese el nuevo codigo de especialidad: ";
-                cin >> codigoEspecialidad;
-                registro.setCodigoEspecialidad(codigoEspecialidad);
-                pos = i;
-                break;
+        if(numeroConsultorio == registro.getNumeroConsultorio() && registro.getEstado()){
+            pos = i;
+            break;
             }
         }
 
-        if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El codigo de especialidad se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el codigo de especialidad." << endl;
-            }
-        } else {
-                cout << "No se encontró ningún consultorio con ese numero." << endl;
+        if(pos == -1){
+            cout << "No se encontro ningun consultorio con ese numero." << endl;
+            return;
         }
+
+        do{
+            codigoEspecialidad = leerEntero("Ingrese el nuevo codigo de especialidad: ");
+            if(codigoEspecialidad <= 0){
+                cout << "Codigo de especialidad invalido." << endl;
+            }
+        }while(codigoEspecialidad <= 0);
+
+        registro.setCodigoEspecialidad(codigoEspecialidad);
+
+        if(_repo.modificar(pos, registro)){
+                cout << "El codigo de especialidad se modificó con éxito." << endl;
+        } else {
+                cout << "No se pudo modificar el codigo de especialidad." << endl;
+        }
+
      }
 
 

@@ -4,20 +4,10 @@
 using namespace std;
 
 PacienteMenuConsulta::PacienteMenuConsulta(){
-    _opciones = 4;
+    _cantidadOpciones = 3;
 }
 
-void PacienteMenuConsulta::mostrar(){
-  int opcion;
 
-  do{
-    system("cls");
-    opcion = seleccionarOpciones();
-    system("cls");
-    ejecutarOpcion(opcion);
-    system("pause");
-  }while(opcion != 0);
-}
 
 void PacienteMenuConsulta::mostrarOpciones(){
     cout << "============================="<<endl;
@@ -30,22 +20,9 @@ void PacienteMenuConsulta::mostrarOpciones(){
     cout << "-----------------------------"<<endl;
 }
 
-int PacienteMenuConsulta::seleccionarOpciones(){
-    int opcion;
-    mostrarOpciones();
-    cout<<"Opcion: ";
-    cin>> opcion;
 
-    while(opcion < 0 || opcion > _opciones){
-      cout << "opcion incorrecta"<<endl;
-      cout << "Opcion: ";
-      cin >> opcion;
-    }
 
-    return opcion;
-}
-
-void PacienteMenuConsulta::ejecutarOpcion(int opcion){
+void PacienteMenuConsulta::ejecutarOpciones(int opcion){
     switch(opcion){
     case 1:
         _pacienteManager.consultarDni();

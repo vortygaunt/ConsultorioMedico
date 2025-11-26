@@ -7,17 +7,7 @@ using namespace std;
         _cantidadOpciones = 5;
     }
 
-    void ReporteMenu::mostrar(){
-        int opcion;
 
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void ReporteMenu::mostrarOpciones(){
         cout << "********* MENU REPORTE *********" << endl;
@@ -31,22 +21,6 @@ using namespace std;
         cout << "********************************" << endl;
     }
 
-    int ReporteMenu::seleccionarOpciones(){
-        int opcion;
-
-        mostrarOpciones();
-
-        cout << "Seleccionar opcion: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opcion: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void ReporteMenu::ejecutarOpciones(int opcion){
         switch(opcion){

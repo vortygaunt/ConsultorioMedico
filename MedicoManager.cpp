@@ -2,6 +2,7 @@
 #include "MedicoManager.h"
 #include "Fecha.h"
 #include "funcionesGlobales.h"
+
 using namespace std;
 
     MedicoManager::MedicoManager(){
@@ -9,6 +10,7 @@ using namespace std;
     }
 
     void MedicoManager::cargar(){
+        bool valido;
         int idMedico;
         string dniMedico;
         string nombreMedico;
@@ -20,18 +22,53 @@ using namespace std;
         Fecha fechaInicio;
 
         idMedico = _repo.getnuevoID();
+        do{
+            cout << "Ingrese el DNI: ";
+            dniMedico = cargarCadena();
 
-        cout << "Ingrese el DNI: ";
-        dniMedico = cargarCadena();
+            valido = soloDigitos(dniMedico);
 
-        cout << "Ingrese el nombre: ";
-        nombreMedico = cargarCadena();
+            if(!valido){
+                cout << "DNI invalido." << endl;
+            }
 
-        cout << "Ingrese el apellido: ";
-        apellidoMedico = cargarCadena();
+        }while(!valido);
 
-        cout << "Ingrese el telefono: ";
-        telefonoMedico = cargarCadena();
+        do{
+            cout << "Ingrese el nombre: ";
+            nombreMedico = cargarCadena();
+
+            valido = soloLetras(nombreMedico);
+
+            if(!valido){
+                cout << "Nombre invalido." << endl;
+            }
+
+        }while(!valido);
+
+        do{
+            cout << "Ingrese el apellido: ";
+            apellidoMedico = cargarCadena();
+
+            valido = soloLetras(apellidoMedico);
+
+            if(!valido){
+                cout << "Apellido invalido." << endl;
+            }
+
+        }while(!valido);
+
+        do{
+            cout << "Ingrese el telefono: ";
+            telefonoMedico = cargarCadena();
+
+            valido = soloDigitos(telefonoMedico);
+
+            if(!valido){
+                cout << "Telefono invalido." << endl;
+            }
+
+        }while(!valido);
 
         cout << "Ingrese el email: ";
         emailMedico = cargarCadena();
@@ -39,10 +76,16 @@ using namespace std;
         cout << "Ingrese la matricula: ";
         matricula = cargarCadena();
 
-        cout << "Ingrese el codigo de especialidad: ";
-        cin >> codigoEspecialidad;
+        do{
+            codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad: ");
 
-        cout << "Ingrese la fecha de inicio: ";
+            if(codigoEspecialidad <= 0){
+                cout << "Codigo invalido." << endl;
+            }
+
+        }while(codigoEspecialidad <= 0);
+
+        cout << "Ingrese la fecha de inicio: " << endl;
         fechaInicio.cargar();
 
         if(_repo.guardar(Medico(idMedico, dniMedico, nombreMedico, apellidoMedico, telefonoMedico, emailMedico, matricula, codigoEspecialidad, fechaInicio, true))){
@@ -178,10 +221,17 @@ using namespace std;
         int cantidad, id, pos = -1;
         Medico registro;
 
-        cout << "Ingrese el ID del médico que desea eliminar: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros en el archivo." << endl;
+            return;
+        }
+
+        id = leerEntero("Ingrese el ID del medico que desea eliminar: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -193,47 +243,66 @@ using namespace std;
 
         if(pos != -1){
             if(_repo.eliminar(pos)){
-                cout << "El médico fue eliminado correctamente." << endl;
+                cout << "El medico fue eliminado correctamente." << endl;
             }else{
-                cout << "No se pudo eliminar al médico." << endl;
+                cout << "No se pudo eliminar al medico." << endl;
             }
         }else{
-            cout << "No se encontro ningún médico con ese ID." << endl;
+            cout << "No se encontro ningun medico con ese ID." << endl;
         }
 
     }
 
     void MedicoManager::modificarTelefono(){
         string telefono;
+        bool valido;
         int id, cantidad, pos = -1;
         Medico registro;
 
-        cout << "Ingrese el ID del médico: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay archivos en el registro." << endl;
+            return;
+        }
+
+        id = leerEntero("Ingrese el ID del medico: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
             if(id == registro.getIdMedico() && registro.getEstado()){
-                cout << "Ingrese el nuevo telefono: ";
-                telefono = cargarCadena();
-                registro.setTelefonoMedico(telefono);
                 pos = i;
                 break;
             }
         }
 
-       if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El teléfono se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el teléfono." << endl;
-            }
-        } else {
-                cout << "No se encontró ningún médico con ese ID." << endl;
+        if(pos == -1){
+            cout << "No se encontro un medico con ese ID." << endl;
+            return;
         }
+
+        cout << "Ingrese el telefono nuevo: ";
+        telefono = cargarCadena();
+
+        valido = soloDigitos(telefono);
+
+        if(!valido){
+            cout << "Telfono no valido." << endl;
+            return;
+        }
+
+        registro.setTelefonoMedico(telefono);
+
+        if(_repo.modificar(pos, registro)){
+                    cout << "El telefono se modifico con exito." << endl;
+            } else {
+                    cout << "No se pudo modificar el telefono." << endl;
+            }
+
     }
 
     void MedicoManager::modificarEmail(){
@@ -241,81 +310,115 @@ using namespace std;
         int id, cantidad, pos = -1;
         Medico registro;
 
-        cout << "Ingrese el ID del médico: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay archivos en el registro." << endl;
+            return;
+        }
+
+        id = leerEntero("Ingrese el ID del medico: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
             if(id == registro.getIdMedico() && registro.getEstado()){
-                cout << "Ingrese el nuevo e-mail: ";
-                email = cargarCadena();
-                registro.setEmailMedico(email);
                 pos = i;
                 break;
             }
         }
 
-        if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El e-mail se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el e-mail." << endl;
-            }
-        } else {
-                cout << "No se encontró ningún médico con ese ID." << endl;
+        if(pos == -1){
+            cout << "No se encontro un medico con ese ID." << endl;
+            return;
         }
+
+        cout << "Ingrese el nuevo e-mail: ";
+        email = cargarCadena();
+
+        registro.setEmailMedico(email);
+
+        if(_repo.modificar(pos, registro)){
+                cout << "El e-mail se modifico con exito." << endl;
+        } else {
+                cout << "No se pudo modificar el e-mail." << endl;
+            }
+
      }
 
      void MedicoManager::modificarCodigoEspecialidad(){
         int codigoEspecialidad, id, cantidad, pos = -1;
         Medico registro;
 
-        cout << "Ingrese el ID del médico: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros en el archivo." << endl;
+            return;
+        }
+
+        id = leerEntero("Ingrese el ID del medico: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
             if(id == registro.getIdMedico() && registro.getEstado()){
-                cout << "Ingrese el nuevo codigo de especialidad: ";
-                cin >> codigoEspecialidad;
-                registro.setCodigoEspecialidad(codigoEspecialidad);
                 pos = i;
                 break;
             }
         }
 
-        if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El codigo de especialidad se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el codigo de especialidad." << endl;
+        if(pos == -1){
+            cout << "No se encontro un medico con ese ID." << endl;
+            return;
+        }
+
+        do{
+            codigoEspecialidad = leerEntero("Ingrese el nuevo codigo de especialidad: ");
+            if(codigoEspecialidad <= 0){
+                cout << "Codigo de especialidad invalido." << endl;
+                return;
             }
+        }while(codigoEspecialidad <= 0);
+
+        registro.setCodigoEspecialidad(codigoEspecialidad);
+
+        if(_repo.modificar(pos, registro)){
+                cout << "El codigo de especialidad se modifico con exito." << endl;
         } else {
-                cout << "No se encontró ningún médico con ese ID." << endl;
+                cout << "No se pudo modificar el codigo de especialidad." << endl;
         }
      }
 
      void MedicoManager::consultarDni(){
+        bool valido;
         string dni;
         Medico registro;
         int cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese el DNI del medico que desea consultar: ";
-        dni = cargarCadena();
-
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
             cout << "No hay registros cargados." << endl;
             return;
         }
+
+        do{
+            cout << "Ingrese el DNI del medico que desea consultar: ";
+            dni = cargarCadena();
+
+            valido = soloDigitos(dni);
+
+            if(!valido){
+                cout << "DNI invalido." << endl;
+            }
+        }while(!valido);
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -328,7 +431,7 @@ using namespace std;
         }
 
         if(!encontrado){
-            cout << "No se encontro ningún médico con ese DNI." << endl;
+            cout << "No se encontro ningun medico con ese DNI." << endl;
         }
      }
 
@@ -337,13 +440,15 @@ using namespace std;
         int codigoEspecialidad, cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese el código de la especialidad que le interesa consultar: ";
-        cin >> codigoEspecialidad;
-
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
-            cout << "No hay registros cargados." << endl;
+            cout << "No hay archivos en el registro." << endl;
+            return;
+        }
+
+        codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad del medico que desea consultar: ");
+        if(codigoEspecialidad <= 0){
+            cout << "Codigo de especialidad invalido." << endl;
             return;
         }
 
@@ -358,7 +463,7 @@ using namespace std;
         }
 
         if(!encontrado){
-            cout << "No se encontro ningún médico que tenga ese código de especialidad." << endl;
+            cout << "No se encontro ningun medico que tenga ese codigo de especialidad." << endl;
         }
      }
 
@@ -368,15 +473,14 @@ using namespace std;
         int cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese la matrícula del médico que desea consultar: ";
-        matricula = cargarCadena();
-
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
             cout << "No hay registros cargados." << endl;
             return;
         }
+
+        cout << "Ingrese la matricula del medico que desea consultar: ";
+        matricula = cargarCadena();
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -389,7 +493,7 @@ using namespace std;
         }
 
         if(!encontrado){
-            cout << "No se encontro ningún médico con esa matrícula." << endl;
+            cout << "No se encontro ningun medico con esa matricula." << endl;
         }
      }
 
@@ -399,15 +503,15 @@ using namespace std;
         int cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese la fecha que desea consultar: " << endl;
-        antiguedad.cargar();
 
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
             cout << "No hay registros cargados." << endl;
             return;
         }
+
+        cout << "Ingrese la fecha que desea consultar: " << endl;
+        antiguedad.cargar();
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -420,6 +524,6 @@ using namespace std;
         }
 
         if(!encontrado){
-            cout << "No se encontro ningún médico que haya iniciado en esa fecha." << endl;
+            cout << "No se encontro ningun medico que haya iniciado en esa fecha." << endl;
         }
      }

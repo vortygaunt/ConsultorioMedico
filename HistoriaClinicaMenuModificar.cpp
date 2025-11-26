@@ -4,20 +4,9 @@
 using namespace std;
 
 HistoriaClinicaMenuModificar::HistoriaClinicaMenuModificar(){
-    _opciones = 4;
+    _cantidadOpciones = 3;
 }
 
-void HistoriaClinicaMenuModificar::mostrar(){
-  int opcion;
-
-  do{
-    system("cls");
-    opcion = seleccionarOpciones();
-    system("cls");
-    ejecutarOpcion(opcion);
-    system("pause");
-  }while(opcion != 0);
-}
 
 void HistoriaClinicaMenuModificar::mostrarOpciones(){
     cout << "============================="<<endl;
@@ -30,22 +19,8 @@ void HistoriaClinicaMenuModificar::mostrarOpciones(){
     cout << "-----------------------------"<<endl;
 }
 
-int HistoriaClinicaMenuModificar::seleccionarOpciones(){
-    int opcion;
-    mostrarOpciones();
-    cout<<"Opcion: ";
-    cin>> opcion;
 
-    while(opcion < 0 || opcion > _opciones){
-      cout << "opcion incorrecta"<<endl;
-      cout << "Opcion: ";
-      cin >> opcion;
-    }
-
-    return opcion;
-}
-
-void HistoriaClinicaMenuModificar::ejecutarOpcion(int opcion){
+void HistoriaClinicaMenuModificar::ejecutarOpciones(int opcion){
     switch(opcion){
     case 1:
        historiaManager.modificarDiagnostico();

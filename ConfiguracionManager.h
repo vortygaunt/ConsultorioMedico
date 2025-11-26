@@ -2,6 +2,10 @@
 #include "MedicoArchivo.h"
 #include "ConsultorioArchivo.h"
 #include "ObraSocialArchivo.h"
+#include "PacienteArchivo.h"
+#include "HistoriaClinicaArchivo.h"
+#include "TurnoArchivo.h"
+#include "EspecialidadArchivo.h"
 
 class ConfiguracionManager{
 public:
@@ -29,7 +33,11 @@ public:
     void exportarCSVHistoriaClinica();
     void exportarCSVEspecialidades();
 private:
+    TurnoArchivo _repoTurno;
     MedicoArchivo _repoMedico;
     ConsultorioArchivo _repoConsultorio;
     ObraSocialArchivo _repoObrasocial;
+    EspecialidadArchivo _repoEspecialidades;
+    PacienteArchivo _repoPaciente;
+    HistoriaClinicaArchivo _repoHistoriaClinica;
 };

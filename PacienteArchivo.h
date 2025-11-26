@@ -15,5 +15,7 @@ public:
     bool modificar(int pos, Paciente& registro);
     bool eliminar(int pos);
     int getCantidadRegistro();
+    void vaciarArchivo();
+    bool existe();
 
 };

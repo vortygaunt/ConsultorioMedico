@@ -30,31 +30,31 @@ void HistoriaClinica::setId(int id){
     _id = id;
 }
 
-void HistoriaClinica::setDniPaciente(const std::string& dniP){
+void HistoriaClinica::setDniPaciente(std::string dniP){
     strncpy(_dniPaciente, dniP.c_str(), 11);
     _dniPaciente[11] = '\0';
 }
 
-void HistoriaClinica::setDniMedico(const std::string& dniM){
+void HistoriaClinica::setDniMedico(std::string dniM){
     strncpy(_dniMedico, dniM.c_str(), 11);
     _dniMedico[11] = '\0';
 }
 
-void HistoriaClinica::setFecha(const Fecha& fecha){
+void HistoriaClinica::setFecha(Fecha fecha){
     _fecha = fecha;
 }
 
-void HistoriaClinica::setDiagnostico(const std::string& diagnostico){
+void HistoriaClinica::setDiagnostico(std::string diagnostico){
     strncpy(_diagnostico, diagnostico.c_str(), 99);
     _diagnostico[99] = '\0';
 }
 
-void HistoriaClinica::setObservaciones(const std::string& observaciones){
+void HistoriaClinica::setObservaciones(std::string observaciones){
     strncpy(_observaciones, observaciones.c_str(), 99);
     _observaciones[99] = '\0';
 }
 
-void HistoriaClinica::setTratamiento(const std::string& tratamiento){
+void HistoriaClinica::setTratamiento(std::string tratamiento){
     strncpy(_tratamiento, tratamiento.c_str(), 99);
     _tratamiento[99] = '\0';
 }
@@ -107,7 +107,7 @@ bool HistoriaClinica::getEstado()
     return _estado;
 }
 
-void HistoriaClinica::mostrar() const {
+void HistoriaClinica::mostrar(){
     cout << "----------------------------------------" << endl;
     cout << "ID: " << _id << endl;
     cout << "DNI PACIENTE: " << _dniPaciente << endl;

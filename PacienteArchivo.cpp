@@ -76,3 +76,17 @@ int PacienteArchivo::getCantidadRegistro() {
 
     return cantidad;
 }
+
+void PacienteArchivo::vaciarArchivo() {
+        FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        fclose(pFile);
+    }
+
+bool PacienteArchivo::existe(){
+    FILE *pFile = fopen(_nombreArchivo.c_str(), "rb");
+    if (pFile == nullptr) {
+        return false;
+    }
+    fclose(pFile);
+    return true;
+}

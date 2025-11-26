@@ -1,18 +1,16 @@
 #pragma once
+#include "Menu.h"
 #include "ConfiguracionManager.h"
 
-class ConfiguracionMenuExportarCSV{
+class ConfiguracionMenuExportarCSV: public Menu{
 public:
     ConfiguracionMenuExportarCSV();
 
-    void mostrar();
-
 protected:
     void mostrarOpciones();
-    int seleccionarOpciones();
     void ejecutarOpciones(int opcion);
 
     ConfiguracionManager _configuracionManager;
 private:
-    int _cantidadOpciones;
+
 };

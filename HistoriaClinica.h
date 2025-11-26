@@ -22,12 +22,12 @@ public:
     HistoriaClinica(int id, std::string dniPaciente, std::string dniMedico, Fecha fecha, std::string diagnostico, std::string observaciones, std::string tratamiento, int idObraSocial,bool estado = true);
 
     void setId(int id);
-    void setDniPaciente(const std::string& dniP);
-    void setDniMedico(const std::string& dniM);
-    void setFecha(const Fecha& fecha);
-    void setDiagnostico(const std::string& diagnostico);
-    void setObservaciones(const std::string& observaciones);
-    void setTratamiento(const std::string& tratamiento);
+    void setDniPaciente(std::string dniP);
+    void setDniMedico(std::string dniM);
+    void setFecha(Fecha fecha);
+    void setDiagnostico(std::string diagnostico);
+    void setObservaciones(std::string observaciones);
+    void setTratamiento(std::string tratamiento);
     void setIdObraSocial(int idObra);
     void setEstado(bool estado);
 
@@ -42,5 +42,5 @@ public:
     int getIdObraSocial();
     bool getEstado();
 
-    void mostrar() const;
+    void mostrar();
 };

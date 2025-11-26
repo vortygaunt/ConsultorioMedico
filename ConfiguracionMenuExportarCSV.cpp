@@ -7,17 +7,7 @@ using namespace std;
         _cantidadOpciones = 7;
     }
 
-    void ConfiguracionMenuExportarCSV::mostrar(){
-        int opcion;
 
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void ConfiguracionMenuExportarCSV::mostrarOpciones(){
         cout << "*** MENU EXPORTAR DATOS CSV ***" << endl;
@@ -33,22 +23,7 @@ using namespace std;
         cout << "*********************************" << endl;
     }
 
-    int ConfiguracionMenuExportarCSV::seleccionarOpciones(){
-        int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opcion: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opcion: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void ConfiguracionMenuExportarCSV::ejecutarOpciones(int opcion){
            switch(opcion){

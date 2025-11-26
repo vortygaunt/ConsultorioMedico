@@ -1,18 +1,16 @@
 #pragma once
+#include "Menu.h"
 #include "MedicoManager.h"
 
-class MedicoListarMenu{
+class MedicoListarMenu: public Menu{
 public:
     MedicoListarMenu();
 
-    void mostrar();
-
 protected:
     void mostrarOpciones();
-    int seleccionarOpciones();
     void ejecutarOpciones(int opcion);
 
     MedicoManager _medicoManager;
 private:
-    int _cantidadOpciones;
+
 };

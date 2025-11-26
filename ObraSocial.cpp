@@ -24,9 +24,11 @@ using namespace std;
     }
     void ObraSocial::setNombre(string nombre){
         strncpy(_nombre, nombre.c_str(), 29);
+        _nombre[29] = '\0';
     }
     void ObraSocial::setTelefonoObraSocial(string telefonoObraSocial){
         strncpy(_telefonoObraSocial, telefonoObraSocial.c_str(), 19);
+        _telefonoObraSocial[19] = '\0';
     }
     void ObraSocial::setEstado(bool estado){
         _estado = estado;

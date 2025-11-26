@@ -1,26 +1,23 @@
 #pragma once
+#include "Menu.h"
 #include "PacienteManager.h"
 #include "PacienteMenuListar.h"
 #include "PacienteModificarMenu.h"
 #include "PacienteMenuConsulta.h"
 
 
-class PacientesMenu
-{
+class PacientesMenu: public Menu{
 private:
-    int _opciones;
     PacienteManager _pacienteManager;
     PacienteMenuListar _pacientesListar;
     PacienteModificarMenu _pacienteModificar;
-    PacienteMenuConsulta consultaPacientes;
+    PacienteMenuConsulta _consultaPacientes;
 
 
 
 
 public:
     PacientesMenu();
-    void mostrar();
     void mostrarOpciones();
-    int seleccionarOpciones();
-    void ejecutarOpcion(int opcion);
+    void ejecutarOpciones(int opcion);
 };

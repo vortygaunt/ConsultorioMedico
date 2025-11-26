@@ -7,17 +7,6 @@ using namespace std;
         _cantidadOpciones = 7;
     }
 
-    void ConfiguracionMenuBackups::mostrar(){
-        int opcion;
-
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void ConfiguracionMenuBackups::mostrarOpciones(){
         cout << "*** MENU COPIAS DE SEGURIDAD ***" << endl;
@@ -33,22 +22,7 @@ using namespace std;
         cout << "*********************************" << endl;
     }
 
-    int ConfiguracionMenuBackups::seleccionarOpciones(){
-        int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opcion: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opcion: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void ConfiguracionMenuBackups::ejecutarOpciones(int opcion){
          switch(opcion){

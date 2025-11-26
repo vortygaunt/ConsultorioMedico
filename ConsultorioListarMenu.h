@@ -1,18 +1,16 @@
 #pragma once
+#include "Menu.h"
 #include "ConsultorioManager.h"
 
-class ConsultorioListarMenu{
+class ConsultorioListarMenu: public Menu{
 public:
     ConsultorioListarMenu();
 
-    void mostrar();
-
 protected:
     void mostrarOpciones();
-    int seleccionarOpciones();
     void ejecutarOpciones(int opcion);
 
     ConsultorioManager _consultorioManager;
 private:
-    int _cantidadOpciones;
+
 };

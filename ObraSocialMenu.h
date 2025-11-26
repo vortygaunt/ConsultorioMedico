@@ -1,20 +1,18 @@
 #pragma once
+#include "Menu.h"
 #include "ObraSocialManager.h"
 #include "ObraSocialModificarMenu.h"
 
-class ObraSocialMenu{
+class ObraSocialMenu: public Menu{
 public:
     ObraSocialMenu();
 
-    void mostrar();
-
 protected:
     void mostrarOpciones();
-    int seleccionarOpciones();
     void ejecutarOpciones(int opcion);
 
     ObraSocialManager _obraSocialManager;
     ObraSocialModificarMenu _obraSocialModificarMenu;
 private:
-    int _cantidadOpciones;
+
 };

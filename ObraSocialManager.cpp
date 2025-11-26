@@ -4,19 +4,40 @@
 
 using namespace std;
 
+    ObraSocialManager::ObraSocialManager(){
+    }
+
     void ObraSocialManager::cargar(){
+        bool valido;
         int idObraSocial;
         string nombre;
         string telefonoObraSocial;
 
         idObraSocial = _repo.getnuevoID();
 
-        cout << "Ingrese el nombre de la obra social: ";
-        nombre = cargarCadena();
+        do{
+            cout << "Ingrese el nombre de la obra social: ";
+            nombre = cargarCadena();
 
-        cout << "Ingrese el telefono: ";
-        telefonoObraSocial = cargarCadena();
+            valido = soloLetras(nombre);
 
+            if(!valido){
+                cout << "Nombre invalido." << endl;
+            }
+
+        }while(!valido);
+
+        do{
+            cout << "Ingrese el telefono: ";
+            telefonoObraSocial = cargarCadena();
+
+            valido = soloDigitos(telefonoObraSocial);
+
+            if(!valido){
+                cout << "Telefono invalido." << endl;
+            }
+
+        }while(!valido);
         if(_repo.guardar(ObraSocial(idObraSocial, nombre, telefonoObraSocial, true))){
             cout << "La obra social se guardo correctamente." << endl;
         }else{
@@ -28,10 +49,16 @@ using namespace std;
         int cantidad, idObraSocial, pos = -1;
         ObraSocial registro;
 
-        cout << "Ingrese el ID de la obra social que desea eliminar: ";
-        cin >> idObraSocial;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "El archivo no tiene registros cargados." << endl;
+        }
+
+        idObraSocial = leerEntero("Ingrese el ID de la obra social que desea eliminar: ");
+        if(idObraSocial <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -93,20 +120,28 @@ using namespace std;
     }
 
     void ObraSocialManager::consultarNombre(){
+        bool valido;
         string nombre;
         ObraSocial registro;
         int cantidad;
         bool encontrado = false;
 
-        cout << "Ingrese el nombre de la obra social que desea consultar: ";
-        nombre = cargarCadena();
-
         cantidad = _repo.getCantidadRegistro();
-
         if(cantidad == 0){
             cout << "No hay registros cargados." << endl;
             return;
         }
+
+        do{
+        cout << "Ingrese el nombre de la obra social que desea consultar: ";
+        nombre = cargarCadena();
+
+        valido = soloLetras(nombre);
+        if(!valido){
+            cout << "Nombre invalido." << endl;
+        }
+
+        }while(!valido);
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -125,66 +160,102 @@ using namespace std;
 
      void ObraSocialManager::modificarNombre(){
         string nombre;
+        bool valido;
         int id, cantidad, pos = -1;
         ObraSocial registro;
 
-        cout << "Ingrese el ID de la obra social: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros cargados en el archivo." << endl;
+        }
+
+        id = leerEntero("Ingrese el ID de la obra social: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
             if(id == registro.getIdObraSocial() && registro.getEstado()){
-                cout << "Ingrese el nuevo nombre: ";
-                nombre = cargarCadena();
-                registro.setNombre(nombre);
                 pos = i;
                 break;
             }
         }
 
-        if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El nombre se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el nombre." << endl;
-            }
-        } else {
-                cout << "No se encontró ninguna obra social con ese ID." << endl;
+        if(pos == -1){
+            cout << "No se encontro una obra social con ese ID." << endl;
+            return;
         }
+
+        do{
+            cout << "Ingrese el nuevo nombre: ";
+            nombre = cargarCadena();
+
+            valido = soloLetras(nombre);
+            if(!valido){
+                cout << "Nombre invalido." << endl;
+            }
+
+        }while(!valido);
+
+        registro.setNombre(nombre);
+
+        if(_repo.modificar(pos, registro)){
+                cout << "El nombre se modificó con éxito." << endl;
+        } else {
+                cout << "No se pudo modificar el nombre." << endl;
+            }
      }
 
       void ObraSocialManager::modificarTelefono(){
         string telefono;
+        bool valido;
         int id, cantidad, pos = -1;
         ObraSocial registro;
 
-        cout << "Ingrese el ID de la obra social: ";
-        cin >> id;
-
         cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros cargados en el archivo." << endl;
+        }
+
+        id = leerEntero("Ingrese el ID de la obra social: ");
+        if(id <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
 
             if(id == registro.getIdObraSocial() && registro.getEstado()){
-                cout << "Ingrese el nuevo telefono: ";
-                telefono = cargarCadena();
-                registro.setTelefonoObraSocial(telefono);
                 pos = i;
                 break;
             }
         }
 
-        if(pos != -1){
-            if(_repo.modificar(pos, registro)){
-                    cout << "El telefono se modificó con éxito." << endl;
-            } else {
-                    cout << "No se pudo modificar el telefono." << endl;
+        if(pos == -1){
+            cout << "No se encontro una obra social con ese ID." << endl;
+            return;
+        }
+
+        do{
+            cout << "Ingrese el nuevo telefono: ";
+            telefono = cargarCadena();
+
+            valido = soloDigitos(telefono);
+            if(!valido){
+                cout << "El telefono no es valido." << endl;
             }
+
+        }while(!valido);
+
+        registro.setTelefonoObraSocial(telefono);
+
+        if(_repo.modificar(pos, registro)){
+                cout << "El telefono se modificó con éxito." << endl;
         } else {
-                cout << "No se encontró ninguna obra social con ese ID." << endl;
+                cout << "No se pudo modificar el telefono." << endl;
         }
       }

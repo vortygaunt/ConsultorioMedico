@@ -7,17 +7,6 @@ using namespace std;
         _cantidadOpciones = 3;
     }
 
-    void ConfiguracionMenu::mostrar(){
-        int opcion;
-
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void ConfiguracionMenu::mostrarOpciones(){
         cout << "*** MENU CONFIGURACION ***" << endl;
@@ -29,22 +18,7 @@ using namespace std;
         cout << "**************************" << endl;
     }
 
-    int ConfiguracionMenu::seleccionarOpciones(){
-        int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opcion: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opcion: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void ConfiguracionMenu::ejecutarOpciones(int opcion){
         switch(opcion){

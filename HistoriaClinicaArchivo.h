@@ -17,5 +17,6 @@ public:
     bool eliminar(int pos);
     int getCantidadRegistro();
     int getNuevoID();
-
+    void vaciarArchivo();
+    bool existe();
 };

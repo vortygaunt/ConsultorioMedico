@@ -1,13 +1,13 @@
 #pragma once
 #include "HistoriaClinicaArchivo.h"
 
-class historiaClinicaManager
+class HistoriaClinicaManager
 {
 private:
     HistoriaClinicaArchivo _repo;
 
 public:
-    historiaClinicaManager();
+    HistoriaClinicaManager();
     void cargar();
     void eliminarHistoriaClinica();
     int buscarPosPorDni(const std::string &dniBuscado);
@@ -21,6 +21,4 @@ public:
     void consultarFechaHC();
     void consultarDiagnostico();
 
-
-    std::string cargarCadena();
 };

@@ -7,20 +7,10 @@ using namespace std;
         _cantidadOpciones = 3;
     }
 
-    void MedicoListarMenu::mostrar(){
-          int opcion;
 
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void MedicoListarMenu::mostrarOpciones(){
-        cout << "********* LISTADOS *********" << endl;
+        cout << "******** MENU LISTAR ********" << endl;
         cout << "1. ORDENADOS POR APELLIDO" << endl;
         cout << "2. ORDENADOS POR ESPECIALIDAD" << endl;
         cout << "3. ORDENADOS POR ANTIGÜEDAD" << endl;
@@ -28,22 +18,7 @@ using namespace std;
         cout << "*****************************" << endl;
     }
 
-    int MedicoListarMenu::seleccionarOpciones(){
-         int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opción: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opción: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void MedicoListarMenu::ejecutarOpciones(int opcion){
            switch(opcion){

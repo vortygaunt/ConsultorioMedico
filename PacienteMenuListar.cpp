@@ -4,20 +4,9 @@
 using namespace std;
 
 PacienteMenuListar::PacienteMenuListar(){
-    _opciones = 4;
+    _cantidadOpciones = 4;
 }
 
-void PacienteMenuListar::mostrar(){
-  int opcion;
-
-  do{
-    system("cls");
-    opcion = seleccionarOpciones();
-    system("cls");
-    ejecutarOpcion(opcion);
-    system("pause");
-  }while(opcion != 0);
-}
 
 void PacienteMenuListar::mostrarOpciones(){
     cout << "============================="<<endl;
@@ -30,22 +19,8 @@ void PacienteMenuListar::mostrarOpciones(){
     cout << "-----------------------------"<<endl;
 }
 
-int PacienteMenuListar::seleccionarOpciones(){
-    int opcion;
-    mostrarOpciones();
-    cout<<"Opcion: ";
-    cin>> opcion;
 
-    while(opcion < 0 || opcion > _opciones){
-      cout << "opcion incorrecta"<<endl;
-      cout << "Opcion: ";
-      cin >> opcion;
-    }
-
-    return opcion;
-}
-
-void PacienteMenuListar::ejecutarOpcion(int opcion){
+void PacienteMenuListar::ejecutarOpciones(int opcion){
     switch(opcion){
     case 1:
         _pacienteManager.listarOrdenApellido();

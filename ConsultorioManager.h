@@ -7,9 +7,12 @@ public:
 
     void cargar();
     void bajaLogica();
+
     void listadoOrdenNumero();
     void listadoOrdenPiso();
+
     void consultarNumeroConsultorio();
+
     void modificarCodigoEspecialidad();
 private:
     ConsultorioArchivo _repo;

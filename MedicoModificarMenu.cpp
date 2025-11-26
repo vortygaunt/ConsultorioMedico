@@ -7,17 +7,6 @@ using namespace std;
         _cantidadOpciones = 3;
     }
 
-    void MedicoModificarMenu::mostrar(){
-        int opcion;
-
-        do{
-            system("cls");
-            opcion = seleccionarOpciones();
-            system("cls");
-            ejecutarOpciones(opcion);
-            system("pause");
-        }while(opcion != 0);
-    }
 
     void MedicoModificarMenu::mostrarOpciones(){
         cout << "********** MENU MODIFICAR **********" << endl;
@@ -28,22 +17,7 @@ using namespace std;
         cout << "************************************" << endl;
     }
 
-    int MedicoModificarMenu::seleccionarOpciones(){
-         int opcion;
 
-        mostrarOpciones();
-
-        cout << "Seleccionar opción: ";
-        cin >> opcion;
-
-        while(opcion < 0 || opcion > _cantidadOpciones){
-            cout << "Opción incorrecta vuelva a elegir" << endl;
-            cout << "Seleccionar opción: ";
-            cin >> opcion;
-        }
-
-        return opcion;
-    }
 
     void MedicoModificarMenu::ejecutarOpciones(int opcion){
         switch(opcion){
