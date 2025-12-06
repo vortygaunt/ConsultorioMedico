@@ -9,20 +9,28 @@ using namespace std;
     }
 
     void ConsultorioManager::cargar(){
+        bool existeConsultorio;
         int numeroConsultorio;
         int pisoConsultorio;
         int codigoEspecialidad;
         int ocupado;
-        int idMedico = 0;
+        int idMedico;
 
         do{
+            existeConsultorio = false;
+
             numeroConsultorio = leerEntero("Ingrese el numero de consultorio: ");
 
             if(numeroConsultorio <= 0){
                 cout << "Numero de consultorio invalido." << endl;
             }
 
-        }while(numeroConsultorio <= 0);
+            if(_repo.existeConsultorio(numeroConsultorio)){
+                cout << "Ya existe un consultorio con ese numero." << endl;
+                existeConsultorio = true;
+            }
+
+        }while(numeroConsultorio <= 0 || existeConsultorio);
 
         do{
             pisoConsultorio = leerEntero("Ingrese el piso del consultorio: ");
@@ -53,6 +61,13 @@ using namespace std;
 
         if(ocupado){
             idMedico = leerEntero("Ingrese el ID del medico que esta ocupando el consultorio: ");
+
+            while(!_repoMedico.existeID(idMedico)){
+                cout << "No existe ningun medico con ese ID." << endl;
+                idMedico = leerEntero("Ingrese nuevamente el ID del medico: ");
+            }
+        }else{
+            idMedico = 0;
         }
 
         if(_repo.guardar(Consultorio(numeroConsultorio, pisoConsultorio, codigoEspecialidad, ocupado, idMedico, true))){

@@ -92,6 +92,43 @@ using namespace std;
         return getCantidadRegistro() + 1;
     }
 
+    bool MedicoArchivo::existeID(int id){
+        Medico registro;
+        int cantidad;
+
+        cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        for(int i= 0; i < cantidad; i++){
+            registro = leer(i);
+            if(registro.getIdMedico() == id && registro.getEstado()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool MedicoArchivo::existeDNI(string dni){
+        int cantidad;
+        Medico registro;
+
+        cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        for(int i=0; i<cantidad; i++){
+            registro = leer(i);
+            if(registro.getEstado() && dni == registro.getDniMedico()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     void MedicoArchivo::vaciarArchivo() {
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
         fclose(pFile);

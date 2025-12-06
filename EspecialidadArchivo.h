@@ -11,6 +11,7 @@ public:
     bool modificar(int pos, Especialidad &registro);
     bool eliminar(int pos);
     int getCantidadRegistro();
+    int getNuevoCodigo();
     void vaciarArchivo();
     bool existe();
 

@@ -36,9 +36,9 @@ using namespace std;
         _ocupado = ocupado;
     }
     void Consultorio::setIdMedico(int idMedico){
-         if(idMedico > 0){
-            _idMedico = idMedico;
-        }
+            if(_idMedico >= 0){
+             _idMedico = idMedico;
+            }
     }
     void Consultorio::setEstado(bool estado){
         _estado = estado;

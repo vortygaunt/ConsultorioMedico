@@ -1,16 +1,21 @@
 #pragma once
 #include "HistoriaClinicaArchivo.h"
+#include "PacienteArchivo.h"
+#include "MedicoArchivo.h"
+#include "ObraSocialArchivo.h"
 
 class HistoriaClinicaManager
 {
 private:
     HistoriaClinicaArchivo _repo;
-
+    PacienteArchivo _repoPaciente;
+    MedicoArchivo _repoMedico;
+    ObraSocialArchivo _repoObraSocial;
 public:
     HistoriaClinicaManager();
     void cargar();
     void eliminarHistoriaClinica();
-    int buscarPosPorDni(const std::string &dniBuscado);
+
 
     void modificarDiagnostico();
     void modificarObservaciones();

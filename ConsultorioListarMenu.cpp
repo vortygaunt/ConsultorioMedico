@@ -10,11 +10,12 @@ using namespace std;
 
 
     void ConsultorioListarMenu::mostrarOpciones(){
-        cout << "********* LISTADOS *********" << endl;
+        cout << "******** MENU LISTADO ********" << endl;
         cout << "1. ORDENADOS POR NUMERO" << endl;
         cout << "2. ORDENADOS POR PISO" << endl;
+        cout << "******************************" << endl;
         cout << "0 . VOLVER" << endl;
-        cout << "*****************************" << endl;
+        cout << "******************************" << endl;
     }
 
 

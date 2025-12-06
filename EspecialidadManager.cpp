@@ -12,13 +12,7 @@ using namespace std;
         string descripcion;
         bool valido;
 
-        do{
-        codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad: ");
-        if(codigoEspecialidad <= 0){
-            cout << "Codigo invalido." << endl;
-        }
-
-        }while(codigoEspecialidad <= 0);
+        codigoEspecialidad = _repo.getNuevoCodigo();
 
         do{
         cout << "Ingrese la descripcion: ";
@@ -81,7 +75,7 @@ using namespace std;
 
         cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
-            cout << "No hay archivos en el registro." << endl;
+            cout << "No hay registros en el archivo." << endl;
             return;
         }
 
@@ -128,7 +122,7 @@ using namespace std;
         int cantidad = _repo.getCantidadRegistro();
 
         if(cantidad == 0){
-            cout << "No hay medicos cargados." << endl;
+            cout << "No hay especialidades cargadas." << endl;
             return;
         }
 

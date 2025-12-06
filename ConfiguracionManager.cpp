@@ -478,7 +478,7 @@ using namespace std;
             return;
         }
 
-        fprintf(exportar, "DNI,Nombre,Apellido,Telefono,e-mail,CodObraSocial,FechaNacimiento,Direccion,Estado\n");
+        fprintf(exportar, "DNI,Nombre,Apellido,Telefono,e-mail,CodObraSocial,FechaNacimiento,Calle,Numero,Localidad,Estado\n");
 
         Paciente reg;
 
@@ -601,7 +601,7 @@ using namespace std;
         for(int i=0; i<cantidad; i++){
             reg = _repoHistoriaClinica.leer(i);
 
-            fprintf(exportar, "%d,%s,%s,%d/%d/%d,%s,%s,%d,%d\n",
+            fprintf(exportar, "%d,%s,%s,%d/%d/%d,%s,%s,%s,%d,%d\n",
             reg.getId(),
             reg.getDniPaciente().c_str(),
             reg.getDniMedico().c_str(),
@@ -609,6 +609,7 @@ using namespace std;
             reg.getFecha().getMes(),
             reg.getFecha().getAnio(),
             reg.getDiagnostico().c_str(),
+            reg.getObservaciones().c_str(),
             reg.getTratamiento().c_str(),
             reg.getIdObraSocial(),
             reg.getEstado()

@@ -9,7 +9,7 @@ HistoriaClinicaManager::HistoriaClinicaManager(){
 
 void HistoriaClinicaManager::cargar()
 {
-    bool valido;
+    bool valido, existe;
     int id;
     string dniPaciente;
     string dniMedico;
@@ -22,26 +22,48 @@ void HistoriaClinicaManager::cargar()
     id = _repo.getNuevoID();
 
     do{
+    existe = true;
     cout << "DNI del paciente: ";
     dniPaciente = cargarCadena();
 
     valido = soloDigitos(dniPaciente);
+
+    if(dniPaciente.size() < 7 || dniPaciente.size() > 11){
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
-    }while(!valido);
+    if(!_repoPaciente.existeDNI(dniPaciente)){
+        cout << "No hay ningun paciente con este DNI." << endl;
+        existe = false;
+    }
+
+    }while(!valido || !existe);
 
     do{
+    existe = true;
     cout << "DNI del medico: ";
     dniMedico = cargarCadena();
 
     valido = soloDigitos(dniMedico);
+
+    if(dniMedico.size() < 7 || dniMedico.size() > 11){
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
-    }while(!valido);
+    if(!_repoMedico.existeDNI(dniMedico)){
+        cout << "No hay ningun medico con ese DNI." << endl;
+        existe = false;
+    }
+
+    }while(!valido || !existe);
 
     cout << "Fecha de Inicio: ";
     fecha.cargar();
@@ -56,11 +78,17 @@ void HistoriaClinicaManager::cargar()
     tratamiento = cargarCadena();
 
     do{
+        existe = true;
         idObraSocial = leerEntero( "Codigo Obra Social: ");
         if(idObraSocial <= 0){
             cout << "ID invalido." << endl;
         }
-    }while(idObraSocial <= 0);
+
+        if(!_repoObraSocial.existeID(idObraSocial)){
+            cout << "No hay ninguna obra social con ese ID." << endl;
+            existe = false;
+        }
+    }while(idObraSocial <= 0 || !existe);
 
 
     if(_repo.guardar(HistoriaClinica(id,dniPaciente,dniMedico,fecha,diagnostico,observaciones,tratamiento,idObraSocial,true)))
@@ -71,22 +99,6 @@ void HistoriaClinicaManager::cargar()
     }
 }
 
-int HistoriaClinicaManager::buscarPosPorDni(const std::string &dniBuscado) {
-    int cantidad = _repo.getCantidadRegistro();
-    if(cantidad == 0){
-        return -1;
-    }
-
-    for (int i = 0; i < cantidad; i++) {
-        HistoriaClinica reg = _repo.leer(i);
-
-        if (reg.getEstado() && reg.getDniPaciente() == dniBuscado) {
-            return i;
-        }
-    }
-
-    return -1;  // no encontrado
-}
 
 void HistoriaClinicaManager::eliminarHistoriaClinica()
 {
@@ -94,7 +106,7 @@ void HistoriaClinicaManager::eliminarHistoriaClinica()
     bool valido;
     do{
         cout << "Ingrese el DNI del paciente a eliminar: ";
-        cin >> dni;
+        dni = cargarCadena();
 
         valido = soloDigitos(dni);
         if(!valido){
@@ -103,37 +115,23 @@ void HistoriaClinicaManager::eliminarHistoriaClinica()
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dni);
+    int pos = _repo.buscarPosPorDni(dni);
 
     if (pos == -1) {
-        cout << "No se encontró una historia clínica con ese DNI.";
+        cout << "No se encontró una historia clínica con ese DNI." << endl;
         return;
     }
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "Historia clinica encontrada: ";
-    historia.mostrar();
-
-
-    char confirmar;
-    cout << "¿Desea eliminar este paciente? (S/N): ";
-    cin >> confirmar;
-
-    if (confirmar != 'S' && confirmar != 'N') {
-        cout << "Operación cancelada.";
-        return;
-    }
-
-
     historia.setEstado(false);
 
 
     if (_repo.modificar(pos, historia)) {
-        cout << "Historia Clinica eliminada correctamente.";
+        cout << "Historia Clinica eliminada correctamente." << endl;
     }
     else {
-        cout << "Error al eliminar la historia clinica.";
+        cout << "Error al eliminar la historia clinica." << endl;
     }
 }
 
@@ -155,7 +153,7 @@ void HistoriaClinicaManager::modificarDiagnostico()
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
 
     if (pos == -1) {
         cout << "No se encontró historia clínica para este DNI.";
@@ -165,7 +163,7 @@ void HistoriaClinicaManager::modificarDiagnostico()
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     historia.mostrar();
 
     cout << "Ingrese nuevo diagnostico: ";
@@ -175,9 +173,9 @@ void HistoriaClinicaManager::modificarDiagnostico()
 
 
     if (_repo.modificar(pos, historia)) {
-        cout << "Diagnostico modificado correctamente.";
+        cout << "Diagnostico modificado correctamente." << endl;
     } else {
-        cout << "Error al modificar el diagnostico.";
+        cout << "Error al modificar el diagnostico." << endl;
     }
 }
 
@@ -199,17 +197,17 @@ void HistoriaClinicaManager::modificarObservaciones()
     }while(!valido);
 
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
 
     if (pos == -1) {
-        cout << "No se encontró historia clínica para este DNI.";
+        cout << "No se encontró historia clínica para este DNI." << endl;
         return;
     }
 
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     historia.mostrar();
 
 
@@ -220,9 +218,9 @@ void HistoriaClinicaManager::modificarObservaciones()
 
 
     if (_repo.modificar(pos, historia)) {
-        cout << "Observaciones actualizadas correctamente.";
+        cout << "Observaciones actualizadas correctamente." << endl;
     } else {
-        cout << "Error al actualizar las observaciones.";
+        cout << "Error al actualizar las observaciones." << endl;
     }
 }
 
@@ -244,16 +242,16 @@ void HistoriaClinicaManager::modificarTratamiento()
     }while(!valido);
 
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
 
     if (pos == -1) {
-        cout << "No se encontró historia clínica para este DNI.";
+        cout << "No se encontró historia clínica para este DNI." << endl;
         return;
     }
 
     HistoriaClinica historia = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     historia.mostrar();
 
     cout << "Ingrese nuevo tratamiento: ";
@@ -285,16 +283,16 @@ void HistoriaClinicaManager::consultarDniPaciente()
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
 
     if (pos == -1) {
-        cout << "No se encontró historia clínica para este DNI.";
+        cout << "No se encontró historia clínica para este DNI." << endl;
         return;
     }
 
     HistoriaClinica reg = _repo.leer(pos);
 
-    cout << "--- HISTORIA CLINICA ENCONTRADA ---";
+    cout << "--- HISTORIA CLINICA ENCONTRADA ---" << endl;
     reg.mostrar();
 }
 
@@ -302,7 +300,7 @@ void HistoriaClinicaManager::consultarFechaHC()
 {
     Fecha fecha;
 
-    cout << "INGRESE LA FECHA DE LA HISTORIA CLINICA A CONSULTAR: ";
+    cout << "INGRESE LA FECHA DE LA HISTORIA CLINICA A CONSULTAR: " << endl;
     fecha.cargar();
 
     int cantidad = _repo.getCantidadRegistro();
@@ -329,7 +327,7 @@ void HistoriaClinicaManager::consultarFechaHC()
     }
 
     if (!encontrado) {
-        cout << "No se encontró ninguna historia clínica con esa fecha.";
+        cout << "No se encontró ninguna historia clínica con esa fecha." << endl;
     }
 }
 
@@ -344,7 +342,7 @@ void HistoriaClinicaManager::consultarDiagnostico()
     }
 
     cout << "INGRESE DIAGNOSTICO A BUSCAR: ";
-    cin >> diagnosticoBuscado;
+    diagnosticoBuscado = cargarCadena();
 
 
     bool encontrado = false;
@@ -355,7 +353,7 @@ void HistoriaClinicaManager::consultarDiagnostico()
         if (reg.getEstado()) {
             if (reg.getDiagnostico() == diagnosticoBuscado) {
                 if (!encontrado) {
-                    cout << "--- PACIENTES CON MISMO DIAGNOSTICO ---";
+                    cout << "--- HISTORIAS CLINICAS CON MISMO DIAGNOSTICO ---" << endl;
                 }
                 reg.mostrar();
                 encontrado = true;
@@ -364,6 +362,6 @@ void HistoriaClinicaManager::consultarDiagnostico()
     }
 
     if (!encontrado) {
-        cout << "No se encontraron pacientes con ese mismo diagnostico.";
+        cout << "No se encontraron pacientes con ese mismo diagnostico." << endl;
     }
 }

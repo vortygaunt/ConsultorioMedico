@@ -33,6 +33,10 @@ HistoriaClinica HistoriaClinicaArchivo::leer(int pos) {
         return reg;
     }
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return reg;
+    }
+
     fseek(pFile, pos * sizeof(HistoriaClinica), SEEK_SET);
     fread(&reg, sizeof(HistoriaClinica), 1, pFile);
 
@@ -48,6 +52,10 @@ bool HistoriaClinicaArchivo::modificar(int pos, HistoriaClinica &registro) {
     pFile = fopen(_nombreArchivo.c_str(), "rb+");
     if (pFile == nullptr) {
         std::cout << "No se pudo modificar el registro";
+        return false;
+    }
+
+    if(pos < 0 || pos >= getCantidadRegistro()){
         return false;
     }
 
@@ -78,6 +86,23 @@ int HistoriaClinicaArchivo::getCantidadRegistro() {
 int HistoriaClinicaArchivo::getNuevoID(){
     return getCantidadRegistro() + 1;
     }
+
+int HistoriaClinicaArchivo::buscarPosPorDni(const std::string &dniBuscado) {
+    int cantidad = getCantidadRegistro();
+    if(cantidad == 0){
+        return -1;
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        HistoriaClinica reg = leer(i);
+
+        if (reg.getEstado() && reg.getDniPaciente() == dniBuscado) {
+            return i;
+        }
+    }
+
+    return -1;  // no encontrado
+}
 
 void HistoriaClinicaArchivo::vaciarArchivo() {
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");

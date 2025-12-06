@@ -15,6 +15,7 @@ public:
     bool modificar(int pos, Paciente& registro);
     bool eliminar(int pos);
     int getCantidadRegistro();
+    bool existeDNI(std::string dni);
     void vaciarArchivo();
     bool existe();
 

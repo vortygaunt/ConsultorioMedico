@@ -16,6 +16,7 @@ using namespace std;
         cout << "3. MODIFICAR CODIGO ESPECIALIDAD" << endl;
         cout << "4. LISTADOS" << endl;
         cout << "5. CONSULTAR" << endl;
+        cout << "********************************" << endl;
         cout << "0 . VOLVER" << endl;
         cout << "********************************" << endl;
     }

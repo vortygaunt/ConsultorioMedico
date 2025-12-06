@@ -92,6 +92,25 @@ using namespace std;
         return getCantidadRegistro() + 1;
     }
 
+    bool ObraSocialArchivo::existeID(int id){
+        int cantidad;
+        ObraSocial registro;
+
+        cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        for(int i=0; i<cantidad; i++){
+            registro = leer(i);
+            if(registro.getEstado() && id == registro.getIdObraSocial()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     void ObraSocialArchivo::vaciarArchivo(){
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
         fclose(pFile);

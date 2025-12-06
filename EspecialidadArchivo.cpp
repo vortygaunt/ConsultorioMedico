@@ -28,6 +28,10 @@ Especialidad EspecialidadArchivo::leer(int pos){
     FILE *pFile;
     Especialidad registro;
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+            return registro;
+    }
+
     pFile = fopen(_nombreArchivo.c_str(), "rb");
     if(pFile == nullptr){
         return registro;
@@ -51,6 +55,10 @@ bool EspecialidadArchivo::modificar(int pos, Especialidad &registro){
         return false;
     }
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
+
     fseek(pFile, sizeof(Especialidad)*pos, SEEK_SET);
 
     resultado = fwrite(&registro, sizeof(Especialidad), 1, pFile);
@@ -62,6 +70,10 @@ bool EspecialidadArchivo::modificar(int pos, Especialidad &registro){
 
 bool EspecialidadArchivo::eliminar(int pos){
     Especialidad registro;
+
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
 
     registro = leer(pos);
     registro.setEstado(false);
@@ -87,6 +99,10 @@ int EspecialidadArchivo::getCantidadRegistro(){
 
     return cantidad;
 }
+
+ int EspecialidadArchivo::getNuevoCodigo(){
+    return getCantidadRegistro() + 1;
+ }
 
 void EspecialidadArchivo::vaciarArchivo(){
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");

@@ -28,6 +28,10 @@ using namespace std;
         FILE *pFile;
         Consultorio registro;
 
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return registro;
+        }
+
         pFile = fopen(_nombreArchivo.c_str(), "rb");
         if(pFile == nullptr){
             return registro;
@@ -51,6 +55,10 @@ using namespace std;
             return false;
         }
 
+         if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
+
         fseek(pFile, sizeof(Consultorio)*pos, SEEK_SET);
 
         resultado = fwrite(&registro, sizeof(Consultorio), 1, pFile);
@@ -62,6 +70,10 @@ using namespace std;
 
     bool ConsultorioArchivo::eliminar(int pos){
         Consultorio registro;
+
+         if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
 
         registro = leer(pos);
         registro.setEstado(false);
@@ -87,6 +99,26 @@ using namespace std;
 
         return cantidad;
     }
+
+    bool ConsultorioArchivo::existeConsultorio(int numero){
+        Consultorio registro;
+        int cantidad;
+
+        cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        for(int i= 0; i < cantidad; i++){
+            registro = leer(i);
+            if(registro.getNumeroConsultorio() == numero){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     void ConsultorioArchivo::vaciarArchivo(){
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");

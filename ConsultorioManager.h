@@ -1,5 +1,6 @@
 #pragma once
 #include "ConsultorioArchivo.h"
+#include "MedicoArchivo.h"
 
 class ConsultorioManager{
 public:
@@ -16,4 +17,5 @@ public:
     void modificarCodigoEspecialidad();
 private:
     ConsultorioArchivo _repo;
+    MedicoArchivo _repoMedico;
 };

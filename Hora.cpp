@@ -27,28 +27,26 @@ using namespace std;
         return _minuto;
     }
 
-    void Hora::cargar(){
-        int hora, minuto;
+  void Hora::cargar(){
+    int hora, minuto;
 
-        do{
-        hora = leerEntero("Ingrese la hora: ");
-        if(hora < 0){
-            cout << "Hora invalida." << endl;
+    do{
+        hora = leerEntero("Ingrese la hora (0-23): ");
+        if(hora < 0 || hora > 23){
+            cout << "Hora inválida. Debe estar entre 0 y 23." << endl;
         }
+    } while(hora < 0 || hora > 23);
 
-        }while(hora < 0);
-
-        do{
-        minuto = leerEntero("Ingrese el minuto: ");
-        if(minuto < 0){
-            cout << "Minuto invalido." << endl;
+    do{
+        minuto = leerEntero("Ingrese los minutos (0-59): ");
+        if(minuto < 0 || minuto > 59){
+            cout << "Minuto inválido. Debe estar entre 0 y 59." << endl;
         }
+    } while(minuto < 0 || minuto > 59);
 
-        }while(minuto < 0);
-
-        setHora(hora);
-        setMinuto(minuto);
-    }
+    setHora(hora);
+    setMinuto(minuto);
+}
 
     void Hora::mostrar(){
         if(_hora < 10){

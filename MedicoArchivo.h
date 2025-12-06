@@ -12,6 +12,8 @@ public:
     bool eliminar(int pos);
     int getCantidadRegistro();
     int getnuevoID();
+    bool existeID(int id);
+    bool existeDNI(std::string dni);
     void vaciarArchivo();
     bool existe();
 

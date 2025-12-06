@@ -15,4 +15,5 @@ public:
     void consultaDescripcion();
 private:
     EspecialidadArchivo _repo;
+
 };

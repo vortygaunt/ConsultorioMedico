@@ -4,3 +4,7 @@ ID,DNI,Nombre,Apellido,Telefono,e-mail,Matricula,CodEspecialidad,FechaInicio,Est
 3,123123,Fabio,Gutierrez,12313123,FG@gmail.com,123fg,6,21/8/2000,1
 4,123123,Pedro,Hernandez,1213234,PH@gmail.com,1231,4,15/9/2001,1
 5,30111222,Carlos,Gomez,1144556677,CG@gmail.com,MAT12345,1,12/5/2015,1
+6,28999888,Mariana,Lopez,1122334455,ML@gmail.com,MAT29811,2,3/11/2017,1
+7,33011221,Santiago,Martinez,1166778899,SG@gmail.com,MAT44567,3,20/2/2020,1
+8,27055444,Lucia,Fernandez,1133445566,LF@gmail.com,MAT11223,4,8/9/2012,1
+9,30990011,Javier,Ruiz,1155667788,JR@gmail.com,MAT88990,5,15/1/2019,1

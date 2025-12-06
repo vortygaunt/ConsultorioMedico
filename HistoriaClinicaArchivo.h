@@ -17,6 +17,7 @@ public:
     bool eliminar(int pos);
     int getCantidadRegistro();
     int getNuevoID();
+    int buscarPosPorDni(const std::string &dniBuscado);
     void vaciarArchivo();
     bool existe();
 };

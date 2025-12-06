@@ -10,23 +10,9 @@ using namespace std;
     }
 
     void Fecha::setDia(int dia){
-        int maxDia = 31;
-
-        if(_mes == 4 || _mes == 6 || _mes == 9 || _mes == 11){
-            maxDia = 30;
-        }
-
-        if(_mes == 2){
-            if(esBiciesto(_anio)){
-                maxDia = 29;
-            }else{
-                maxDia = 28;
-            }
-        }
-
-        if(dia > 0 && dia <= maxDia){
-            _dia = dia;
-        }
+       if(dia > 0){
+        _dia = dia;
+       }
     }
 
     void Fecha::setMes(int mes){
@@ -50,36 +36,52 @@ using namespace std;
         return _anio;
     }
 
-    void Fecha::cargar(){
-        int dia, mes, anio;
-        do{
-        dia = leerEntero("Ingrese el dia: ");
-        if(dia <= 0){
-            cout << "Dia invalido." << endl;
+    void Fecha::cargar() {
+    int dia, mes, anio;
+
+    // CARGAR AÑO
+    do {
+        anio = leerEntero("Ingrese el año: ");
+        if (anio <= 0) {
+            cout << "Año inválido. Debe ser mayor a 0." << endl;
         }
+    } while (anio <= 0);
 
-        }while(dia <= 0);
-
-        do{
+    // CARGAR MES
+    do {
         mes = leerEntero("Ingrese el mes: ");
-        if(mes < 0){
-            cout << "Mes invalido." << endl;
+        if (mes < 1 || mes > 12) {
+            cout << "Mes inválido. Debe estar entre 1 y 12." << endl;
         }
+    } while (mes < 1 || mes > 12);
 
-        }while(mes <= 0);
+    // CALCULAR DÍAS MÁXIMOS
+    int maxDia = 31;
 
-        do{
-        anio = leerEntero("Ingrese el anio: ");
-        if(anio <= 0){
-            cout << "Anio invalido." << endl;
-        }
+    switch (mes) {
+        case 4: case 6: case 9: case 11:
+            maxDia = 30;
+            break;
 
-        }while(anio <= 0);
-
-        setAnio(anio);
-        setMes(mes);
-        setDia(dia);
+        case 2:
+            maxDia = esBiciesto(anio) ? 29 : 28;
+            break;
     }
+
+    // CARGAR DÍA
+    do {
+        dia = leerEntero("Ingrese el día: ");
+        if (dia < 1 || dia > maxDia) {
+            cout << "Día inválido para el mes ingresado. ";
+            cout << "Debe estar entre 1 y " << maxDia << "." << endl;
+        }
+    } while (dia < 1 || dia > maxDia);
+
+    // Asignar valores
+   setAnio(anio);
+   setMes(mes);
+   setDia(dia);
+}
 
     void Fecha::mostrar(){
         cout << _dia << "/" << _mes << "/" << _anio << endl;

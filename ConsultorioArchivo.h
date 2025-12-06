@@ -11,6 +11,7 @@ public:
     bool modificar(int pos, Consultorio &registro);
     bool eliminar(int pos);
     int getCantidadRegistro();
+    bool existeConsultorio(int numero);
     void vaciarArchivo();
     bool existe();
 private:

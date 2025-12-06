@@ -77,6 +77,24 @@ int PacienteArchivo::getCantidadRegistro() {
     return cantidad;
 }
 
+bool PacienteArchivo::existeDNI(string dni){
+    int cantidad;
+    Paciente registro;
+
+    cantidad = getCantidadRegistro();
+    if(cantidad == 0){
+        return false;
+    }
+
+    for(int i=0; i<cantidad; i++){
+        registro = leer(i);
+        if(dni == registro.getDniPaciente() && registro.getEstadoPaciente()){
+            return true;
+        }
+    }
+    return false;
+}
+
 void PacienteArchivo::vaciarArchivo() {
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
         fclose(pFile);
