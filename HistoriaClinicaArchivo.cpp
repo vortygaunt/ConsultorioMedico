@@ -27,13 +27,13 @@ HistoriaClinica HistoriaClinicaArchivo::leer(int pos) {
     HistoriaClinica reg;
     FILE *pFile;
 
-    pFile = fopen(_nombreArchivo.c_str(), "rb");
-    if (pFile == nullptr){
-        std::cout << "No se pudo leer el registro";
+    if(pos < 0 || pos >= getCantidadRegistro()){
         return reg;
     }
 
-    if(pos < 0 || pos >= getCantidadRegistro()){
+    pFile = fopen(_nombreArchivo.c_str(), "rb");
+    if (pFile == nullptr){
+        std::cout << "No se pudo leer el registro";
         return reg;
     }
 
@@ -49,13 +49,13 @@ bool HistoriaClinicaArchivo::modificar(int pos, HistoriaClinica &registro) {
     FILE *pFile;
     bool resultado;
 
-    pFile = fopen(_nombreArchivo.c_str(), "rb+");
-    if (pFile == nullptr) {
-        std::cout << "No se pudo modificar el registro";
+    if(pos < 0 || pos >= getCantidadRegistro()){
         return false;
     }
 
-    if(pos < 0 || pos >= getCantidadRegistro()){
+    pFile = fopen(_nombreArchivo.c_str(), "rb+");
+    if (pFile == nullptr) {
+        std::cout << "No se pudo modificar el registro";
         return false;
     }
 

@@ -6,16 +6,12 @@ using namespace std;
 
 Paciente::Paciente(): _codigoObraSocial(0), _fechaNacimiento(), _direccion(), _estado(false)
 {
-    /*strcpy(_dniPaciente, "");
+    strcpy(_dniPaciente, "");
     strcpy(_nombre, "");
     strcpy(_apellido, "");
     strcpy(_telefono, "");
-    strcpy(_email, "");*/
-    _nombre[0] = '\0';
-    _apellido[0] = '\0';
-    _dniPaciente[0] = '\0';
-    _telefono[0] = '\0';
-    _email[0] = '\0';
+    strcpy(_email, "");
+
 }
 
 Paciente::Paciente(std::string dniPaciente, std::string nombre, std::string apellido, std::string telefono, PacienteDireccion direccion, std::string email, int codObraSocial, Fecha fecha, bool estado)
@@ -118,5 +114,6 @@ void Paciente::mostrar() {
     cout << "Codigo Obra Social: " << _codigoObraSocial << endl;
     cout << "Fecha de nacimiento: ";
     _fechaNacimiento.mostrar();
-    cout << "----------------------------------------"<<endl;
+
 }
+

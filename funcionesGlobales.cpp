@@ -31,7 +31,7 @@ bool soloDigitos(string &str){
     return true;
 }
 
-bool soloLetras(std::string &str){
+bool soloLetras(string &str){
     int tamanio = str.size();
 
     if(tamanio == 0){
@@ -61,7 +61,7 @@ int leerEntero(const string &mensaje){
     return valor;
 }
 
-float leerFloat(const std::string &mensaje){
+float leerFloat(const string &mensaje){
     float valor;
 
     cout << mensaje;
@@ -74,5 +74,23 @@ float leerFloat(const std::string &mensaje){
         cout << mensaje;
     }
     return valor;
+}
+
+bool soloDigitosyLetras(string &str){
+    int tamanio = str.size();
+
+    if(tamanio == 0){
+        return false;
+    }
+
+    for(int i = 0; i < tamanio; i++){
+
+        // Permite letras, números y espacio
+        if(!isalnum(str[i]) && str[i] != ' '){
+            return false;
+        }
+    }
+
+    return true;
 }
 

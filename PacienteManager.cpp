@@ -21,11 +21,15 @@ void PacienteManager::cargar()
     PacienteDireccion direcPaciente;
 
     do{
-    cout << "DNI: ";
-    dniPaciente = cargarCadena();
+        cout << "DNI: ";
+        dniPaciente = cargarCadena();
 
-    valido = soloDigitos(dniPaciente);
-    if(!valido){
+        valido = soloDigitos(dniPaciente);
+
+        if (dniPaciente.size() < 7 || dniPaciente.size() > 11) {
+            valido = false;
+        }
+        if(!valido){
         cout << "DNI invalido." << endl;
     }
 
@@ -58,6 +62,11 @@ void PacienteManager::cargar()
     telefonoPaciente = cargarCadena();
 
     valido = soloDigitos(telefonoPaciente);
+
+    if (telefonoPaciente.size() < 6 || telefonoPaciente.size() > 15) {
+        valido = false;
+    }
+
     if(!valido){
         cout << "Telefono invalido." << endl;
     }
@@ -72,12 +81,12 @@ void PacienteManager::cargar()
     emailPaciente = cargarCadena();
 
     do{
-    codObraSocial = leerEntero("Codigo Obra Social: ");
-    if(codObraSocial <= 0){
-        cout << "Codigo invalido." << endl;
-    }
+        codObraSocial = leerEntero("Codigo Obra Social: ");
+        if (!_obraManager.existeCodigo(codObraSocial)){
+                cout << "El codigo ingresado no existe. Intente nuevamente: " << endl;
+            }
+    } while (!_obraManager.existeCodigo(codObraSocial));
 
-    }while(codObraSocial <= 0);
 
     cout << "Fecha de nacimiento:";
     fechaNacimiento.cargar();
@@ -91,23 +100,6 @@ void PacienteManager::cargar()
     }
 }
 
-int PacienteManager::buscarPosPorDni(std::string& dniBuscado)
-{
-    int cantidad = _repo.getCantidadRegistro();
-    if(cantidad == 0){
-        return -1;
-    }
-
-    for (int i = 0; i < cantidad; i++) {
-        Paciente reg = _repo.leer(i);
-
-        if (reg.getEstadoPaciente() && reg.getDniPaciente() == dniBuscado) {
-            return i;
-        }
-    }
-
-    return -1; // no encontrado
-}
 
 void PacienteManager::modificarTelefono()
 {
@@ -117,33 +109,43 @@ void PacienteManager::modificarTelefono()
 
     do{
     cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+    dniBuscado = cargarCadena();
 
     valido = soloDigitos(dniBuscado);
+
+    if (dniBuscado.size() < 7 || dniBuscado.size() > 11) {
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
     if (pos == -1) {
-        cout << "No se encontró un paciente con ese DNI.";
+        cout << "No se encontró un paciente con ese DNI." << endl;
         return;
     }
 
     Paciente paciente = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
     do{
     cout << "Ingrese nuevo telefono: ";
-    cin >> nuevoTel;
+    nuevoTel = cargarCadena();
 
     valido = soloDigitos(nuevoTel);
+
+    if (nuevoTel.size() < 6 || nuevoTel.size() > 15) {
+        valido = false;
+    }
+
     if(!valido){
-        cout << "Telefono invalio" << endl;
+        cout << "Telefono invalido" << endl;
     }
     }while(!valido);
 
@@ -164,29 +166,34 @@ void PacienteManager::modificarDireccion()
 
     do{
     cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+    dniBuscado = cargarCadena();
 
     valido = soloDigitos(dniBuscado);
+
+    if (dniBuscado.size() < 7 || dniBuscado.size() > 11){
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
     if (pos == -1) {
-        cout << "No se encontró un paciente con ese DNI.";
+        cout << "No se encontró un paciente con ese DNI." << endl;
         return;
     }
 
     Paciente paciente = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
 
     PacienteDireccion nuevaDir;
-    cout << "Ingrese nueva direccion: ";
+    cout << "Ingrese nueva direccion: " << endl;
 
     nuevaDir.cargar();
 
@@ -209,29 +216,34 @@ void PacienteManager::modificarEmail()
 
    do{
     cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+    dniBuscado = cargarCadena();
 
     valido = soloDigitos(dniBuscado);
+
+    if (dniBuscado.size() < 7 || dniBuscado.size() > 11) {
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
     if (pos == -1) {
-        cout << "No se encontró un paciente con ese DNI.";
+        cout << "No se encontró un paciente con ese DNI." << endl;
         return;
     }
 
     Paciente paciente = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
 
     cout << "Ingrese nuevo email: ";
-    cin >> nuevoEmail;
+    nuevoEmail = cargarCadena();
 
     paciente.setEmailPaciente(nuevoEmail);
 
@@ -251,16 +263,21 @@ void PacienteManager::modificarObraSocial()
 
     do{
     cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+    dniBuscado = cargarCadena();
 
     valido = soloDigitos(dniBuscado);
+
+    if (dniBuscado.size() < 7 || dniBuscado.size() > 11) {
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
     if (pos == -1) {
         cout << "No se encontró un paciente con ese DNI.";
         return;
@@ -268,17 +285,22 @@ void PacienteManager::modificarObraSocial()
 
     Paciente paciente = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
 
     do{
+    valido = true;
+
     nuevoCodigo = leerEntero("Ingrese nuevo codigo de obra social: ");
-    if(nuevoCodigo <= 0){
-        cout << "Codigo invalido" << endl;
+
+     if (!_obraManager.existeCodigo(nuevoCodigo)) {
+        cout << "Código inexistente. Intente nuevamente." << endl;
+        valido = false;
     }
 
-    }while(nuevoCodigo <= 0);
+
+    }while(!valido);
 
     paciente.setCodigoObraSocialPaciente(nuevoCodigo);
 
@@ -292,21 +314,25 @@ void PacienteManager::modificarObraSocial()
 void PacienteManager::eliminarPaciente()
 {
     string dniBuscado;
-    char confirmar;
     bool valido;
 
     do{
-    cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+        cout << "Ingrese DNI del paciente: ";
+        dniBuscado = cargarCadena();
 
-    valido = soloDigitos(dniBuscado);
-    if(!valido){
-        cout << "DNI invalido." << endl;
-    }
+        valido = soloDigitos(dniBuscado);
+
+        if (dniBuscado.size() < 7 || dniBuscado.size() > 11) {
+            valido = false;
+        }
+
+        if(!valido){
+            cout << "DNI invalido." << endl;
+        }
 
     }while(!valido);
 
-   int pos = buscarPosPorDni(dniBuscado);
+   int pos = _repo.buscarPosPorDni(dniBuscado);
     if (pos == -1) {
         cout << "No se encontró un paciente con ese DNI.";
         return;
@@ -315,17 +341,17 @@ void PacienteManager::eliminarPaciente()
 
     Paciente paciente = _repo.leer(pos);
 
-    cout << "Paciente encontrado: ";
+    cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
 
-    cout << "¿Desea eliminar este paciente? (S/N): ";
+    /*cout << "¿Desea eliminar este paciente? (S/N): ";
     cin >> confirmar;
 
     if (confirmar != 'S' && confirmar != 'N') {
         cout << "Operación cancelada.";
         return;
-    }
+    }*/
 
 
     paciente.setEstadoPaciente(false);
@@ -492,19 +518,24 @@ void PacienteManager::consultarDni()
 
    do{
     cout << "Ingrese DNI del paciente: ";
-    cin >> dniBuscado;
+    dniBuscado = cargarCadena();
 
     valido = soloDigitos(dniBuscado);
+
+    if (dniBuscado.size() < 7 || dniBuscado.size() > 11) {
+        valido = false;
+    }
+
     if(!valido){
         cout << "DNI invalido." << endl;
     }
 
     }while(!valido);
 
-    int pos = buscarPosPorDni(dniBuscado);
+    int pos = _repo.buscarPosPorDni(dniBuscado);
 
     if (pos == -1) {
-        cout << "No se encontro un paciente con ese DNI.";
+        cout << "No se encontro un paciente con ese DNI." << endl;
         return;
     }
 
@@ -519,6 +550,7 @@ void PacienteManager::consultarObraSocial()
     int cantidad = _repo.getCantidadRegistro();
     if(cantidad == 0){
         cout << "No hay registros cargados en el archivo." << endl;
+        return;
     }
 
     do{
@@ -538,7 +570,7 @@ void PacienteManager::consultarObraSocial()
         if (reg.getEstadoPaciente()) {
             if (reg.getCodigoObraSocialPaciente() == codigoBuscado) {
                 if (!encontrado) {
-                    cout << "--- PACIENTES CON ESA OBRA SOCIAL ---";
+                    cout << "--- PACIENTES CON ESA OBRA SOCIAL ---" << endl;
                 }
                 reg.mostrar();
                 encontrado = true;
@@ -547,7 +579,7 @@ void PacienteManager::consultarObraSocial()
     }
 
     if (!encontrado) {
-        cout << "No se encontraron pacientes con esa obra social.";
+        cout << "No se encontraron pacientes con esa obra social." << endl;
     }
 }
 
@@ -559,11 +591,12 @@ void PacienteManager::consultarApellidoNombre()
     int cantidad = _repo.getCantidadRegistro();
     if(cantidad == 0){
         cout << "No hay registros cargados en el archivo." << endl;
+        return;
     }
 
     do{
     cout << "Ingrese nombre: ";
-    cin >> nombreBuscado;
+    nombreBuscado = cargarCadena();
 
     valido = soloLetras(nombreBuscado);
     if(!valido){
@@ -574,7 +607,7 @@ void PacienteManager::consultarApellidoNombre()
 
     do{
     cout << "Ingrese apellido: ";
-    cin >> apellidoBuscado;
+    apellidoBuscado = cargarCadena();
 
     valido = soloLetras(apellidoBuscado);
     if(!valido){
@@ -593,7 +626,7 @@ void PacienteManager::consultarApellidoNombre()
                 reg.getApellidoPaciente() == apellidoBuscado) {
 
                 if (!encontrado) {
-                    cout << "--- PACIENTES ENCONTRADOS ---";
+                    cout << "--- PACIENTES ENCONTRADOS ---" << endl;
                 }
 
                 reg.mostrar();
@@ -606,3 +639,4 @@ void PacienteManager::consultarApellidoNombre()
         cout << "No se encontraron pacientes con ese nombre y apellido."<<endl;
     }
 }
+

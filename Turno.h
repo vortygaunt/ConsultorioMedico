@@ -5,7 +5,7 @@
 class Turno{
 public:
     Turno();
-    Turno(int id, std::string dniPaciente, int IdMedico, Fecha fechaAtencion, Hora horaAtencion, float importeConsulta, int numeroConsultorio, int estado = 1);
+    Turno(int id, std::string dniPaciente, int IdMedico, Fecha fechaAtencion, Hora horaAtencion, float importeConsulta, int numeroConsultorio, int codigoEspecialidad, int IdObraSocial, int estado = 1);
 
     void setID(int id);
     void setDniPaciente(std::string dniPaciente);
@@ -14,6 +14,8 @@ public:
     void setHoraAtencion(Hora horaAtencion);
     void setImporteConsulta(float importeConsulta);
     void setNumeroConsultorio(int numeroConsultorio);
+    void setCodigoEspecialidad(int codigoEspecialidad);
+    void setIdObraSocial(int idObraSocial);
     void setEstado(int estado);
 
     int getID();
@@ -23,6 +25,8 @@ public:
     Hora getHoraAtencion();
     float getImporteConsulta();
     int getNumeroConsultorio();
+    int getCodigoEspecialidad();
+    int getIdObraSocial();
     int getEstado();
 
     void mostrar();
@@ -35,5 +39,8 @@ private:
     Hora _horaAtencion;
     float _importeConsulta;
     int _numeroConsultorio;
+    int _codigoEspecialidad;
+    int _idObraSocial;
     int _estado; // 0 cancelado, 1 pendiente, 2 atendido
 };
+

@@ -50,12 +50,12 @@ using namespace std;
         FILE *pFile;
         bool resultado;
 
-        pFile = fopen(_nombreArchivo.c_str(), "rb+");
-        if(pFile == nullptr){
+        if(pos < 0 || pos >= getCantidadRegistro()){
             return false;
         }
 
-         if(pos < 0 || pos >= getCantidadRegistro()){
+        pFile = fopen(_nombreArchivo.c_str(), "rb+");
+        if(pFile == nullptr){
             return false;
         }
 
@@ -117,6 +117,79 @@ using namespace std;
         }
 
         return false;
+    }
+
+        bool ConsultorioArchivo::usarConsultorio(int numeroConsultorio, int idMedico){
+
+        int cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        Consultorio reg;
+        int pos = -1;
+
+        for (int i = 0; i < cantidad; i++){
+            reg = leer(i);
+            if (reg.getNumeroConsultorio() == numeroConsultorio){
+                pos = i;
+                break;
+            }
+        }
+
+        if (pos == -1){
+            return false;
+        }
+
+        if(reg.getOcupado() == true){
+            if(reg.getIdMedico() != idMedico){
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        }
+
+        reg.setOcupado(true);
+        reg.setIdMedico(idMedico);
+
+
+        return modificar(pos, reg);
+
+    }
+
+    bool ConsultorioArchivo::liberarConsultorio(int numeroConsultorio){
+
+        int cantidad = getCantidadRegistro();
+        if(cantidad == 0){
+            return false;
+        }
+
+        Consultorio reg;
+        int pos = -1;
+
+        for (int i = 0; i < cantidad; i++) {
+            reg = leer(i);
+            if (reg.getNumeroConsultorio() == numeroConsultorio) {
+                pos = i;
+                break;
+            }
+        }
+
+        if (pos == -1) {
+            return false;
+        }
+
+        if (reg.getOcupado() == false) {
+            return true;
+        }
+
+        reg.setOcupado(false);
+        reg.setIdMedico(0);  // 0 = nadie
+
+        return modificar(pos, reg);
+
     }
 
 

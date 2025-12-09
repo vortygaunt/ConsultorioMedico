@@ -21,6 +21,7 @@ public:
     void modificarObservaciones();
     void modificarTratamiento();
 
+    void listarPorFecha();
 
     void consultarDniPaciente();
     void consultarFechaHC();

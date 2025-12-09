@@ -50,12 +50,12 @@ bool EspecialidadArchivo::modificar(int pos, Especialidad &registro){
     FILE *pFile;
     bool resultado;
 
-    pFile = fopen(_nombreArchivo.c_str(), "rb+");
-    if(pFile == nullptr){
+    if(pos < 0 || pos >= getCantidadRegistro()){
         return false;
     }
 
-    if(pos < 0 || pos >= getCantidadRegistro()){
+    pFile = fopen(_nombreArchivo.c_str(), "rb+");
+    if(pFile == nullptr){
         return false;
     }
 
@@ -103,6 +103,21 @@ int EspecialidadArchivo::getCantidadRegistro(){
  int EspecialidadArchivo::getNuevoCodigo(){
     return getCantidadRegistro() + 1;
  }
+
+ bool EspecialidadArchivo::existeCodigo(int codigo){
+        int cantidad = getCantidadRegistro();
+
+        for (int i=0; i< cantidad; i++){
+            Especialidad _esp = leer(i);
+
+            if(_esp.getCodigoEspecialidad() == codigo){
+                if(_esp.getEstado()== 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 void EspecialidadArchivo::vaciarArchivo(){
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");

@@ -1,0 +1,8 @@
+ID,DniPaciente,DniMedico,Fecha,Diagnostico,Observaciones,Tratamiento,IdObraSocial,Estado
+1,40258741,30111222,12/11/2025,Faringitis aguda,Paciente refiere dolor de garganta desde hace 48 horas, sin dificultad respiratoria.,Antibiotico amoxicilina 500 mg cada 8 horas por 7 dias. Reposo e hidratacion.,2,0
+2,35987412,30111222,8/10/2025,Lumbalgia cronica,Dolor lumbar persistente, sin irradiacion, empeora al estar sentado largos periodos.,Kinesiologia 3 veces por semana + diclofenac 75 mg cada 12 horas por 5 d¡as.,1,0
+3,44523109,30111222,1/9/2025,Diabetes tipo 2 descompensada,Glucemia elevada en controles recientes, paciente refiere poco seguimiento de dieta,Ajuste de dosis de metformina + plan alimentario + control semanal.,3,1
+4,37890411,30111222,19/11/2025,Bronquitis viral,Tos seca persistente, fiebre leve, auscultacion con ruidos bronquiales minimos.,Nebulizaciones con solucion fisiol¢gica + ibuprofeno 400 mg si hay fiebre.,2,1
+5,41258930,27055444,25/10/2025,Fractura de radio en consolidacion,Buena evolucion post yeso, movilidad limitada pero en mejora.,Ejercicios de movilidad guiados + control en 3 semanas.,5,1
+6,40258741,28999888,12/11/2025,Faringitis aguda,Paciente refiere dolor de garganta desde hace 48 horas, sin dificultad respiratoria.,Amoxicilina 500 mg cada 8 horas por 7 dias. Reposo e hidratacion.,2,1
+7,35987412,30125478,8/10/2025,Lumbalgia cronica,Dolor lumbar persistente, sin irradiacion, empeora al estar sentado largos periodos.,Kinesiologia 3 veces por semana + diclofenac 75 mg cada 12 horas por 5 dias.,1,1

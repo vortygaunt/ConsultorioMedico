@@ -33,6 +33,10 @@ using namespace std;
 
             valido = soloDigitos(telefonoObraSocial);
 
+            if (telefonoObraSocial.size() < 6 || telefonoObraSocial.size() > 15) {
+                valido = false;
+            }
+
             if(!valido){
                 cout << "Telefono invalido." << endl;
             }
@@ -52,6 +56,7 @@ using namespace std;
         cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
             cout << "El archivo no tiene registros cargados." << endl;
+            return;
         }
 
         idObraSocial = leerEntero("Ingrese el ID de la obra social que desea eliminar: ");
@@ -158,7 +163,7 @@ using namespace std;
         }
     }
 
-     void ObraSocialManager::modificarNombre(){
+    void ObraSocialManager::modificarNombre(){
         string nombre;
         bool valido;
         int id, cantidad, pos = -1;
@@ -167,6 +172,7 @@ using namespace std;
         cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
             cout << "No hay registros cargados en el archivo." << endl;
+            return;
         }
 
         id = leerEntero("Ingrese el ID de la obra social: ");
@@ -207,9 +213,9 @@ using namespace std;
         } else {
                 cout << "No se pudo modificar el nombre." << endl;
             }
-     }
+    }
 
-      void ObraSocialManager::modificarTelefono(){
+    void ObraSocialManager::modificarTelefono(){
         string telefono;
         bool valido;
         int id, cantidad, pos = -1;
@@ -218,6 +224,7 @@ using namespace std;
         cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
             cout << "No hay registros cargados en el archivo." << endl;
+            return;
         }
 
         id = leerEntero("Ingrese el ID de la obra social: ");
@@ -245,6 +252,10 @@ using namespace std;
             telefono = cargarCadena();
 
             valido = soloDigitos(telefono);
+            if (telefono.size() < 6 || telefono.size() > 15) {
+                valido = false;
+            }
+
             if(!valido){
                 cout << "El telefono no es valido." << endl;
             }
@@ -258,4 +269,5 @@ using namespace std;
         } else {
                 cout << "No se pudo modificar el telefono." << endl;
         }
-      }
+    }
+

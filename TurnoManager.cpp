@@ -18,6 +18,8 @@ using namespace std;
         float importeConsulta;
         int numeroConsultorio;
         bool valido;
+        int codigoEspecialidad;
+        int idObraSocial;
 
         id = _repo.getNuevoID();
 
@@ -26,23 +28,32 @@ using namespace std;
             dniPaciente = cargarCadena();
 
             valido = soloDigitos(dniPaciente);
+
+            if (dniPaciente.size() < 7 || dniPaciente.size() > 11) {
+                valido = false;
+            }
+
             if(!valido){
                 cout << "DNI invalido." << endl;
             }
         }while(!valido);
 
         do{
+            valido = true;
+
             idMedico = leerEntero("Ingrese el ID del medico: ");
-            if(idMedico <= 0){
-                cout << "ID invalido." << endl;
+
+            if(!_repoMedico.existeID(idMedico)){
+                cout << "El ID ingresado no existe. Intente nuevamente."<<endl;
+                valido = false;
             }
 
-        }while(idMedico <= 0);
+        }while(!valido);
 
-        cout << "Ingrese la fecha de atencion: ";
+        cout << "Ingrese la fecha de atencion: " << endl;
         fechaAtencion.cargar();
 
-        cout << "Ingrese la hora de atencion: ";
+        cout << "Ingrese la hora de atencion: " << endl;
         horaAtencion.cargar();
 
         do{
@@ -54,19 +65,55 @@ using namespace std;
         }while(importeConsulta < 0);
 
         do{
+            valido = true;
+
             numeroConsultorio = leerEntero("Ingrese el numero de consultorio: ");
-            if(numeroConsultorio <= 0){
-                cout << "Numero de consultorio invalido." << endl;
+
+            if(!_repoConsultorio.existeConsultorio(numeroConsultorio)){
+                cout << "No existe un consultorio con ese numero." << endl;
+                valido = false;
             }
 
-        }while(numeroConsultorio <= 0);
+            if(!_repoConsultorio.usarConsultorio(numeroConsultorio, idMedico)){
+               cout << "Consultorio no disponible. Ingrese nuevamente otro consultrio."<< endl;
+               valido = false;
+            }
 
-        if(_repo.guardar(Turno(id, dniPaciente, idMedico, fechaAtencion, horaAtencion, importeConsulta, numeroConsultorio, 1))){
+        }while(!valido);
+
+
+        do {
+            valido = true;
+
+            codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad: ");
+
+            if (!_repoEspecialidad.existeCodigo(codigoEspecialidad)){
+                cout << "El codigo ingresado no existe. Intente nuevamente. " << endl;
+                valido = false;
+            }
+
+        } while (!valido);
+
+        do {
+            valido = true;
+
+            idObraSocial = leerEntero("Ingrese el codigo de la Obra Social: ");
+
+            if (!_repoObraSocial.existeCodigo(idObraSocial)){
+                cout << "El codigo ingresado no existe. Intente nuevamente. " << endl;
+                valido = false;
+            }
+
+        } while (!valido);
+
+        if(_repo.guardar(Turno(id, dniPaciente, idMedico, fechaAtencion, horaAtencion, importeConsulta, numeroConsultorio, codigoEspecialidad, idObraSocial, 1))){
             cout << "EL turno se guardo correctamente." << endl;
         }else{
             cout << "Hubo un error al intentar guardar el turno." << endl;
         }
     }
+
+
 
     void TurnoManager::bajaLogica(){
         int cantidad, id, pos = -1;
@@ -92,14 +139,20 @@ using namespace std;
             }
         }
 
-        if(pos != -1){
-            if(_repo.eliminar(pos)){
-                cout << "El turno fue cancelado correctamente." << endl;
-            }else{
-                cout << "No se pudo cancelar el turno." << endl;
-            }
-        }else{
-            cout << "No se encontro ningun turno con ese ID." << endl;
+        if(pos == -1){
+          cout << "No se encontro nigun turno con ese ID."<< endl;
+          return;
+        }
+
+        int _consultorio = registro.getNumeroConsultorio();
+        registro.setEstado(false);
+
+        if(_repo.modificar(pos, registro)){
+            cout << "El turno fue cancelado correctamente." << endl;
+            _repoConsultorio.liberarConsultorio(_consultorio);
+        }
+        else{
+            cout << "No se pudo cancelar el turno." << endl;
         }
     }
 
@@ -140,10 +193,10 @@ using namespace std;
         registro.setFechaAtencion(fechaNueva);
 
         if(_repo.modificar(pos, registro)){
-                    cout << "La fecha se modifico con exito." << endl;
-            } else {
-                    cout << "No se pudo modificar el telefono." << endl;
-            }
+            cout << "La fecha se modifico con exito." << endl;
+        } else {
+            cout << "No se pudo modificar el telefono." << endl;
+        }
     }
 
     void TurnoManager::modificarHora(){
@@ -190,7 +243,7 @@ using namespace std;
     }
 
     void TurnoManager::modificarNumeroConsultorio(){
-        int numeroNuevo;
+        int numeroNuevo, consultorioViejo;
         int id, cantidad, pos = -1;
         Turno registro;
 
@@ -227,6 +280,13 @@ using namespace std;
             return;
         }
 
+        consultorioViejo = registro.getNumeroConsultorio();
+
+        if(!_repoConsultorio.usarConsultorio(numeroNuevo, registro.getIdMedico())){
+            cout << "Consultorio no disponible." << endl;
+            return;
+        }
+
         registro.setNumeroConsultorio(numeroNuevo);
 
         if(_repo.modificar(pos, registro)){
@@ -234,6 +294,8 @@ using namespace std;
             } else {
                     cout << "No se pudo modificar el numero de consultorio." << endl;
             }
+
+            _repoConsultorio.liberarConsultorio(consultorioViejo);
     }
 
     void TurnoManager::modificarImporte(){
@@ -325,6 +387,10 @@ using namespace std;
 
    void TurnoManager::listadoFiltradoMedico(){
         int idMedico = leerEntero("Ingrese el ID del medico: ");
+        if(idMedico <= 0){
+            cout << "ID invalido." << endl;
+            return;
+        }
 
         int cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
@@ -449,9 +515,8 @@ using namespace std;
             return;
         }
 
-
-            cout << "Ingrese la fecha del turno que desea consultar: ";
-            fecha.cargar();
+        cout << "Ingrese la fecha del turno que desea consultar: ";
+        fecha.cargar();
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -576,3 +641,46 @@ using namespace std;
             cout << "No se encontraron turnos con ese estado." << endl;
         }
     }
+
+    void TurnoManager::marcarTurnoAtendido(){
+
+        int id;
+        cout << "Ingrese el ID del turno atendido: ";
+        cin >> id;
+
+        int cantidad = _repo.getCantidadRegistro();
+        if(cantidad == 0){
+            cout << "No hay registros en el archivo." << endl;
+            return;
+        }
+
+        Turno reg;
+        int pos = -1;
+
+        for (int i = 0; i < cantidad; i++) {
+            reg = _repo.leer(i);
+            if (reg.getID() == id) {
+                pos = i;
+                break;
+            }
+        }
+
+        if (pos == -1) {
+            cout << "No se encontro el turno." << endl;
+            return;
+        }
+
+        if (reg.getEstado() != 1) {
+            cout << "Solo se pueden marcar turnos pendientes." << endl;
+            return;
+        }
+
+        reg.setEstado(2);
+        _repo.modificar(pos, reg);
+
+        // Liberar consultorio
+        _repoConsultorio.liberarConsultorio(reg.getNumeroConsultorio());
+
+        cout << "Turno atendido y consultorio liberado." << endl;
+    }
+

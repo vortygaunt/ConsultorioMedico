@@ -28,6 +28,10 @@ using namespace std;
         FILE *pFile;
         ObraSocial registro;
 
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return registro;
+        }
+
         pFile = fopen(_nombreArchivo.c_str(), "rb");
         if(pFile == nullptr){
             return registro;
@@ -46,6 +50,10 @@ using namespace std;
         FILE *pFile;
         bool resultado;
 
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
+
         pFile = fopen(_nombreArchivo.c_str(), "rb+");
         if(pFile == nullptr){
             return false;
@@ -62,6 +70,10 @@ using namespace std;
 
     bool ObraSocialArchivo::eliminar(int pos){
         ObraSocial registro;
+
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
 
         registro = leer(pos);
         registro.setEstado(false);
@@ -124,3 +136,25 @@ using namespace std;
         fclose(pFile);
         return true;
     }
+
+     bool ObraSocialArchivo::existeCodigo(int codigo){
+
+        if(codigo <= 0){
+            return false;
+        }
+        int cantidad = getCantidadRegistro();
+
+        for (int i=0; i< cantidad; i++){
+            ObraSocial _obraS = leer(i);
+
+            if(_obraS.getIdObraSocial() == codigo){
+                if(_obraS.getEstado()== 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+

@@ -267,6 +267,46 @@ void HistoriaClinicaManager::modificarTratamiento()
     }
 }
 
+void HistoriaClinicaManager::listarPorFecha(){
+    int cantidad = _repo.getCantidadRegistro();
+
+    if(cantidad == 0){
+        cout << "No hay historias clinicas cargadas."<< endl;
+        return;
+    }
+
+    HistoriaClinica* _historia = new HistoriaClinica[cantidad];
+
+    for(int i = 0; i < cantidad; i++){
+        _historia[i] = _repo.leer(i);
+    }
+
+    for(int i = 0; i < cantidad; i++){
+        bool intercambio = false;
+
+        for(int j=0; j<cantidad-i-1; j++){
+            if(_historia[j].getFecha() > _historia[j+1].getFecha()){
+                HistoriaClinica aux = _historia[j];
+                _historia[j] = _historia[j+1];
+                _historia[j+1] = aux;
+                intercambio = true;
+            }
+        }
+        if(!intercambio){
+            break;
+        }
+
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        if (_historia[i].getEstado()) {
+            _historia[i].mostrar();
+        }
+    }
+
+    delete[] _historia;
+}
+
 void HistoriaClinicaManager::consultarDniPaciente()
 {
     string dniBuscado;

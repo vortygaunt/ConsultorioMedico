@@ -28,6 +28,10 @@ Turno TurnoArchivo::leer(int pos){
     FILE *pFile;
     Turno registro;
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return registro;
+    }
+
     pFile = fopen(_nombreArchivo.c_str(), "rb");
     if(pFile == nullptr){
         return registro;
@@ -46,6 +50,10 @@ bool TurnoArchivo::modificar(int pos, Turno &registro){
     FILE *pFile;
     bool resultado;
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
+
     pFile = fopen(_nombreArchivo.c_str(), "rb+");
     if(pFile == nullptr){
         return false;
@@ -62,6 +70,10 @@ bool TurnoArchivo::modificar(int pos, Turno &registro){
 
 bool TurnoArchivo::eliminar(int pos){
     Turno registro;
+
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
 
     registro = leer(pos);
     registro.setEstado(0);

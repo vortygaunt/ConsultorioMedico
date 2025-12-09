@@ -495,9 +495,9 @@ using namespace std;
             reg.getFechaNacimientoPaciente().getDia(),
             reg.getFechaNacimientoPaciente().getMes(),
             reg.getFechaNacimientoPaciente().getAnio(),
-            reg.getDireccionPaciente().getCalle(),
+            reg.getDireccionPaciente().getCalle().c_str(),
             reg.getDireccionPaciente().getNumero(),
-            reg.getDireccionPaciente().getLocalidad(),
+            reg.getDireccionPaciente().getLocalidad().c_str(),
             reg.getEstadoPaciente()
         );
 

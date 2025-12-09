@@ -1,6 +1,8 @@
 #include <iostream>
 #include "PacienteArchivo.h"
 
+using namespace std;
+
 PacienteArchivo::PacienteArchivo(std::string nombreArchivo):_nombreArchivo(nombreArchivo) {
 
 }
@@ -29,6 +31,9 @@ Paciente PacienteArchivo::leer(int pos) {
     FILE *pFile;
     Paciente reg;
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return reg;
+    }
 
     pFile = fopen(_nombreArchivo.c_str(), "rb");
     if (pFile == nullptr){
@@ -47,6 +52,10 @@ bool PacienteArchivo::modificar(int pos, Paciente& registro) {
     FILE *pFile;
     bool resultado;
 
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
+
     pFile = fopen(_nombreArchivo.c_str(), "rb+");
     if (pFile == nullptr) {
         std::cout << "No se pudo modificar el registro";
@@ -59,6 +68,19 @@ bool PacienteArchivo::modificar(int pos, Paciente& registro) {
     fclose(pFile);
     return resultado;
 }
+
+bool PacienteArchivo::eliminar(int pos){
+    Paciente registro;
+
+    if(pos < 0 || pos >= getCantidadRegistro()){
+        return false;
+    }
+
+    registro = leer(pos);
+    registro.setEstadoPaciente(false);
+
+    return modificar(pos, registro);
+    }
 
 int PacienteArchivo::getCantidadRegistro() {
     FILE *pFile;
@@ -95,6 +117,24 @@ bool PacienteArchivo::existeDNI(string dni){
     return false;
 }
 
+int PacienteArchivo::buscarPosPorDni(string& dniBuscado)
+{
+    int cantidad = getCantidadRegistro();
+    if(cantidad == 0){
+        return -1;
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        Paciente reg = leer(i);
+
+        if (reg.getEstadoPaciente() && reg.getDniPaciente() == dniBuscado) {
+            return i;
+        }
+    }
+
+    return -1; // no encontrado
+}
+
 void PacienteArchivo::vaciarArchivo() {
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
         fclose(pFile);
@@ -108,3 +148,4 @@ bool PacienteArchivo::existe(){
     fclose(pFile);
     return true;
 }
+

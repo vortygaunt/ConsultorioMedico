@@ -4,10 +4,13 @@
 
 class PacienteModificarMenu: public Menu{
 private:
+
+protected:
     PacienteManager _pacienteManager;
+
+    void mostrarOpciones();
+    void ejecutarOpciones(int opcion);
 
 public:
     PacienteModificarMenu();
-    void mostrarOpciones();
-    void ejecutarOpciones(int opcion);
 };

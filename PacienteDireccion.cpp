@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "PacienteDireccion.h"
+#include "funcionesGlobales.h"
 
 using namespace std;
 
@@ -11,51 +12,82 @@ PacienteDireccion::PacienteDireccion()
     strcpy(_localidad, "");
 }
 
-void PacienteDireccion::setCalle(const char* calle) {
-    strncpy(_calle, calle, sizeof(_calle) - 1);
+void PacienteDireccion::setCalle(const string &calle) {
+    strncpy(_calle, calle.c_str(), sizeof(_calle) - 1);
+    _calle[sizeof(_calle) - 1] = '\0';
 }
 
 void PacienteDireccion::setNumero(int numero) {
-    _numero = numero;
+    if(numero > 0){
+        _numero = numero;
+    }
 }
 
-void PacienteDireccion::setLocalidad(const char* localidad) {
-    strncpy(_localidad, localidad, sizeof(_localidad) - 1);
+void PacienteDireccion::setLocalidad(const string &localidad) {
+    strncpy(_localidad, localidad.c_str(), sizeof(_localidad) - 1);
+    _localidad[sizeof(_localidad) - 1] = '\0';
 }
 
-const char* PacienteDireccion::getCalle() const {
-    return _calle;
+string PacienteDireccion::getCalle(){
+    return string(_calle);
 }
 
-int PacienteDireccion::getNumero() const {
+int PacienteDireccion::getNumero(){
     return _numero;
 }
 
-const char* PacienteDireccion::getLocalidad() const {
-    return _localidad;
+string PacienteDireccion::getLocalidad(){
+    return string(_localidad);
 }
 
 void PacienteDireccion::cargar() {
-    char aux[50];
+    string calle;
+    string localidad;
+    int numero;
+    bool valido;
 
-    cout << "CALLE: ";
-    cin.ignore();
-    cin.getline(aux, 50);
-    setCalle(aux);
+    do{
+        cout << "CALLE: ";
+        calle = cargarCadena();
 
-    cout << "NUMERO: ";
-    cin >> _numero;
-    cin.ignore();
+        valido = soloDigitosyLetras(calle);
 
-    cout << "LOCALIDAD: ";
-    cin.getline(aux, 50);
-    setLocalidad(aux);
+            if(!valido){
+                cout << "Calle invalida." << endl;
+            }
+
+    }while(!valido);
+    setCalle(calle);
+
+    do{
+        numero = leerEntero("NUMERO: ");
+
+        if(numero <= 0){
+            cout << "Numero de calle invalido." << endl;
+        }
+
+    }while(numero <= 0);
+    setNumero(numero);
+
+    do{
+        cout << "LOCALIDAD: ";
+        localidad = cargarCadena();
+
+        valido = soloLetras(localidad);
+
+        if(!valido){
+            cout << "Localidad invalida." << endl;
+        }
+
+    }while(!valido);
+    setLocalidad(localidad);
 }
 
 
-void PacienteDireccion::mostrar()const{
+void PacienteDireccion::mostrar(){
 
-    cout<<"CALLE "<< _calle <<endl;
-    cout<<"NUMERO "<< _numero <<endl;
-    cout<<"LOCALIDAD "<< _localidad <<endl;
+    cout<<"CALLE: "<< _calle <<endl;
+    cout<<"NUMERO: "<< _numero <<endl;
+    cout<<"LOCALIDAD: "<< _localidad <<endl;
 }
+

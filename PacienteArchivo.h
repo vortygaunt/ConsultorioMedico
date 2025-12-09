@@ -16,6 +16,7 @@ public:
     bool eliminar(int pos);
     int getCantidadRegistro();
     bool existeDNI(std::string dni);
+    int buscarPosPorDni(std::string& dniBuscado);
     void vaciarArchivo();
     bool existe();
 

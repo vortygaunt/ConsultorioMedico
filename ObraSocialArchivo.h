@@ -15,6 +15,8 @@ public:
     bool existeID(int id);
     void vaciarArchivo();
     bool existe();
+    bool existeCodigo(int codigo);
+
 private:
     std::string _nombreArchivo;
 };

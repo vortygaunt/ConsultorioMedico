@@ -4,11 +4,13 @@
 
 class HistoriaClinicaMenuConsulta: public Menu{
 private:
-    HistoriaClinicaManager historiaManager;
 
-public:
-    HistoriaClinicaMenuConsulta();
+protected:
+    HistoriaClinicaManager historiaManager;
 
     void mostrarOpciones();
     void ejecutarOpciones(int opcion);
+public:
+    HistoriaClinicaMenuConsulta();
+
 };

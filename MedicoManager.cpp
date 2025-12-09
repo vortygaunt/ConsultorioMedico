@@ -28,6 +28,10 @@ using namespace std;
 
             valido = soloDigitos(dniMedico);
 
+            if (dniMedico.size() < 7 || dniMedico.size() > 11) {
+                valido = false;
+            }
+
             if(!valido){
                 cout << "DNI invalido." << endl;
             }
@@ -64,6 +68,10 @@ using namespace std;
 
             valido = soloDigitos(telefonoMedico);
 
+            if (telefonoMedico.size() < 6 || telefonoMedico.size() > 15) {
+                valido = false;
+            }
+
             if(!valido){
                 cout << "Telefono invalido." << endl;
             }
@@ -73,8 +81,17 @@ using namespace std;
         cout << "Ingrese el email: ";
         emailMedico = cargarCadena();
 
-        cout << "Ingrese la matricula: ";
-        matricula = cargarCadena();
+        do{
+            cout << "Ingrese la matricula: ";
+            matricula = cargarCadena();
+
+            valido = soloDigitosyLetras(matricula);
+
+            if(!valido){
+                cout << "Matricula invalida." << endl;
+            }
+
+        }while(!valido);
 
         do{
             codigoEspecialidad = leerEntero("Ingrese el codigo de especialidad: ");
@@ -347,9 +364,9 @@ using namespace std;
                 cout << "No se pudo modificar el e-mail." << endl;
             }
 
-     }
+    }
 
-     void MedicoManager::modificarCodigoEspecialidad(){
+    void MedicoManager::modificarCodigoEspecialidad(){
         int codigoEspecialidad, id, cantidad, pos = -1;
         Medico registro;
 
@@ -383,7 +400,6 @@ using namespace std;
             codigoEspecialidad = leerEntero("Ingrese el nuevo codigo de especialidad: ");
             if(codigoEspecialidad <= 0){
                 cout << "Codigo de especialidad invalido." << endl;
-                return;
             }
         }while(codigoEspecialidad <= 0);
 
@@ -394,9 +410,9 @@ using namespace std;
         } else {
                 cout << "No se pudo modificar el codigo de especialidad." << endl;
         }
-     }
+    }
 
-     void MedicoManager::consultarDni(){
+    void MedicoManager::consultarDni(){
         bool valido;
         string dni;
         Medico registro;
@@ -414,6 +430,10 @@ using namespace std;
             dni = cargarCadena();
 
             valido = soloDigitos(dni);
+
+            if(dni.size() < 7 || dni.size() > 11){
+                valido = false;
+            }
 
             if(!valido){
                 cout << "DNI invalido." << endl;
@@ -433,9 +453,9 @@ using namespace std;
         if(!encontrado){
             cout << "No se encontro ningun medico con ese DNI." << endl;
         }
-     }
+    }
 
-     void MedicoManager::consultarCodigoEspecialidad(){
+    void MedicoManager::consultarCodigoEspecialidad(){
         Medico registro;
         int codigoEspecialidad, cantidad;
         bool encontrado = false;
@@ -465,13 +485,14 @@ using namespace std;
         if(!encontrado){
             cout << "No se encontro ningun medico que tenga ese codigo de especialidad." << endl;
         }
-     }
+    }
 
-     void MedicoManager::consultarMatricula(){
+    void MedicoManager::consultarMatricula(){
         string matricula;
         Medico registro;
         int cantidad;
         bool encontrado = false;
+        bool valido = false;
 
         cantidad = _repo.getCantidadRegistro();
         if(cantidad == 0){
@@ -479,8 +500,17 @@ using namespace std;
             return;
         }
 
-        cout << "Ingrese la matricula del medico que desea consultar: ";
-        matricula = cargarCadena();
+        do{
+            cout << "Ingrese la matricula del medico que desea consultar: ";
+            matricula = cargarCadena();
+
+            valido = soloDigitosyLetras(matricula);
+
+            if(!valido){
+                cout << "Matricula invalida." << endl;
+            }
+
+        }while(!valido);
 
         for(int i=0; i<cantidad; i++){
             registro = _repo.leer(i);
@@ -495,9 +525,9 @@ using namespace std;
         if(!encontrado){
             cout << "No se encontro ningun medico con esa matricula." << endl;
         }
-     }
+    }
 
-     void MedicoManager::consultarAntiguedad(){
+    void MedicoManager::consultarAntiguedad(){
         Fecha antiguedad;
         Medico registro;
         int cantidad;
@@ -526,4 +556,6 @@ using namespace std;
         if(!encontrado){
             cout << "No se encontro ningun medico que haya iniciado en esa fecha." << endl;
         }
-     }
+    }
+
+

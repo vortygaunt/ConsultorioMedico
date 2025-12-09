@@ -5,7 +5,7 @@
 using namespace std;
 
 HistoriaClinicaMenu::HistoriaClinicaMenu(){
-    _cantidadOpciones = 4;
+    _cantidadOpciones = 5;
 }
 
 
@@ -16,7 +16,8 @@ void HistoriaClinicaMenu::mostrarOpciones(){
     cout << "1. Cargar nueva Historia Clinica"<<endl;
     cout << "2. Modificar historia clinica"<<endl;
     cout << "3. Eliminar historia clinica"<<endl;
-    cout << "4. Consultas"<<endl;
+    cout << "4. Listado" << endl;
+    cout << "5. Consultas"<<endl;
     cout << "0. Volver al menu anterior"<<endl;
     cout << "-----------------------------"<<endl;
 }
@@ -35,6 +36,9 @@ void HistoriaClinicaMenu::ejecutarOpciones(int opcion){
         historiaManager.eliminarHistoriaClinica();
         break;
     case 4:
+        historiaManager.listarPorFecha();
+        break;
+    case 5:
         consultaHC.mostrar();
         break;
 

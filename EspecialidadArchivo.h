@@ -12,6 +12,7 @@ public:
     bool eliminar(int pos);
     int getCantidadRegistro();
     int getNuevoCodigo();
+    bool existeCodigo(int codigo);
     void vaciarArchivo();
     bool existe();
 

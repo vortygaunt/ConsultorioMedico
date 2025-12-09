@@ -1,7 +1,7 @@
 #pragma once
 #include <cstring>
 
-using namespace std;
+
 
 class PacienteDireccion{
 private:
@@ -13,16 +13,17 @@ public:
 
     PacienteDireccion();
 
-    void setCalle(const char*calle);
+    void setCalle(const std::string &calle);
     void setNumero(int numero);
-    void setLocalidad(const char* localidad);
+    void setLocalidad(const std::string &localidad);
 
-    const char* getCalle() const;
-    int getNumero() const;
-    const char* getLocalidad() const;
+    std::string getCalle();
+    int getNumero();
+    std::string getLocalidad();
 
     void cargar();
-    void mostrar()const;
+    void mostrar();
 
 };
+
 

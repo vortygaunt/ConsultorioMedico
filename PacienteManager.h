@@ -1,15 +1,17 @@
 #pragma once
 #include "PacienteArchivo.h"
+#include "ObraSocialArchivo.h"
 
 class PacienteManager{
 private:
     PacienteArchivo _repo;
+    ObraSocialArchivo _obraManager;
 
 public:
     PacienteManager();
     void cargar();
     void eliminarPaciente();
-    int buscarPosPorDni(std::string& dniBuscado);
+
 
     void modificarTelefono();
     void modificarDireccion();
@@ -26,3 +28,4 @@ public:
     void listarObraSocial();
 
 };
+

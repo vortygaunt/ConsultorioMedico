@@ -16,7 +16,9 @@ using namespace std;
             opcion = seleccionarOpciones();
             system("cls");
             ejecutarOpciones(opcion);
-            system("pause");
+            if(opcion != 0){
+             system("pause");
+            }
         }while(opcion != 0);
 
     }

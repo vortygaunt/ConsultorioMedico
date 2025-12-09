@@ -4,7 +4,7 @@
 using namespace std;
 
     TurnoMenu::TurnoMenu(){
-        _cantidadOpciones = 5;
+        _cantidadOpciones = 6;
     }
 
     void TurnoMenu::mostrarOpciones(){
@@ -14,6 +14,7 @@ using namespace std;
         cout << "3. MODIFICAR TURNO" << endl;
         cout << "4. LISTADOS" << endl;
         cout << "5. CONSULTAS" << endl;
+        cout << "6. MARCAR TURNO ATENDIDO" << endl;
         cout << "*************************" << endl;
         cout << "0 . VOLVER" << endl;
         cout << "*************************" << endl;
@@ -34,6 +35,9 @@ using namespace std;
         break;
     case 5:
          _turnoConsultarMenu.mostrar();
+        break;
+    case 6:
+        _turnoManager.marcarTurnoAtendido();
         break;
 
         }

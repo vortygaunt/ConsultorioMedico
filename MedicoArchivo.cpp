@@ -28,10 +28,15 @@ using namespace std;
         FILE *pFile;
         Medico registro;
 
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return registro;
+        }
+
         pFile = fopen(_nombreArchivo.c_str(), "rb");
         if(pFile == nullptr){
             return registro;
         }
+
 
         fseek(pFile, sizeof(Medico)*pos, SEEK_SET);
 
@@ -45,6 +50,10 @@ using namespace std;
     bool MedicoArchivo::modificar(int pos, Medico &registro){
         FILE *pFile;
         bool resultado;
+
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
 
         pFile = fopen(_nombreArchivo.c_str(), "rb+");
         if(pFile == nullptr){
@@ -62,6 +71,10 @@ using namespace std;
 
     bool MedicoArchivo::eliminar(int pos){
         Medico registro;
+
+        if(pos < 0 || pos >= getCantidadRegistro()){
+            return false;
+        }
 
         registro = leer(pos);
         registro.setEstado(false);
@@ -92,26 +105,7 @@ using namespace std;
         return getCantidadRegistro() + 1;
     }
 
-    bool MedicoArchivo::existeID(int id){
-        Medico registro;
-        int cantidad;
-
-        cantidad = getCantidadRegistro();
-        if(cantidad == 0){
-            return false;
-        }
-
-        for(int i= 0; i < cantidad; i++){
-            registro = leer(i);
-            if(registro.getIdMedico() == id && registro.getEstado()){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool MedicoArchivo::existeDNI(string dni){
+      bool MedicoArchivo::existeDNI(string dni){
         int cantidad;
         Medico registro;
 
@@ -142,3 +136,25 @@ using namespace std;
         fclose(pFile);
         return true;
     }
+
+    bool MedicoArchivo::existeID(int id){
+        if(id <= 0){
+            return false;
+        }
+
+        int cantidad = getCantidadRegistro();
+
+
+        for (int i = 0; i < cantidad; i++){
+            Medico _med = leer(i);
+
+            if(_med.getIdMedico() == id){
+                if(_med.getEstado()== 1){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+

@@ -5,12 +5,12 @@
 using namespace std;
 
 Turno::Turno()
-:_id(0), _idMedico(0), _fechaAtencion(), _horaAtencion(), _importeConsulta(0), _numeroConsultorio(0), _estado(1){
+:_id(0), _idMedico(0), _fechaAtencion(), _horaAtencion(), _importeConsulta(0), _numeroConsultorio(0),_codigoEspecialidad(0), _idObraSocial(0), _estado(1){
     strcpy(_dniPaciente, "");
 
 }
 
-Turno::Turno(int id, string dniPaciente, int IdMedico, Fecha fechaAtencion, Hora horaAtencion, float importeConsulta, int numeroConsultorio, int estado){
+Turno::Turno(int id, string dniPaciente, int IdMedico, Fecha fechaAtencion, Hora horaAtencion, float importeConsulta, int numeroConsultorio, int codigoEspecialidad, int idObraSocial, int estado){
     setID(id);
     setDniPaciente(dniPaciente);
     setIdMedico(IdMedico);
@@ -18,6 +18,8 @@ Turno::Turno(int id, string dniPaciente, int IdMedico, Fecha fechaAtencion, Hora
     setHoraAtencion(horaAtencion);
     setImporteConsulta(importeConsulta);
     setNumeroConsultorio(numeroConsultorio);
+    setCodigoEspecialidad(codigoEspecialidad);
+    setIdObraSocial(idObraSocial);
     setEstado(estado);
 }
 
@@ -58,6 +60,18 @@ void Turno::setNumeroConsultorio(int numeroConsultorio){
     }
 }
 
+void Turno::setCodigoEspecialidad(int codigoEspecialidad){
+    if(codigoEspecialidad > 0){
+        _codigoEspecialidad = codigoEspecialidad;
+    }
+}
+
+void Turno::setIdObraSocial(int idObraSocial){
+    if(idObraSocial > 0){
+        _idObraSocial = idObraSocial;
+    }
+}
+
 void Turno::setEstado(int estado){
     if(estado == 0 || estado == 1 || estado == 2){
         _estado = estado;
@@ -92,6 +106,14 @@ int Turno::getNumeroConsultorio(){
     return _numeroConsultorio;
 }
 
+int Turno::getCodigoEspecialidad(){
+    return _codigoEspecialidad;
+}
+
+int Turno::getIdObraSocial(){
+    return _idObraSocial;
+}
+
 int Turno::getEstado(){
     return _estado;
 }
@@ -107,6 +129,8 @@ void Turno::mostrar(){
     _horaAtencion.mostrar();
     cout << "Importe de la consulta: $" << _importeConsulta << endl;
     cout << "Numero de consultorio: " << _numeroConsultorio << endl;
+    cout << "Especialidad: "<< _codigoEspecialidad << endl;
+    cout << "Obra Social del paciente: "<< _idObraSocial <<endl;
     switch(_estado){
     case 0: textoEstado = "Cancelado";
         break;
@@ -115,6 +139,7 @@ void Turno::mostrar(){
     case 2: textoEstado = "Atendido";
         break;
     }
-    cout << "Estado: " << _estado << endl;
+    cout << "Estado: " << textoEstado << endl;
     cout << "------------------------------------------------------" << endl;
 }
+

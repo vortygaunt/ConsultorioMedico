@@ -41,9 +41,9 @@ using namespace std;
 
     // CARGAR AÑO
     do {
-        anio = leerEntero("Ingrese el año: ");
+        anio = leerEntero("Ingrese el anio: ");
         if (anio <= 0) {
-            cout << "Año inválido. Debe ser mayor a 0." << endl;
+            cout << "Anio inválido. Debe ser mayor a 0." << endl;
         }
     } while (anio <= 0);
 
@@ -70,9 +70,9 @@ using namespace std;
 
     // CARGAR DÍA
     do {
-        dia = leerEntero("Ingrese el día: ");
+        dia = leerEntero("Ingrese el dia: ");
         if (dia < 1 || dia > maxDia) {
-            cout << "Día inválido para el mes ingresado. ";
+            cout << "Dia inválido para el mes ingresado. ";
             cout << "Debe estar entre 1 y " << maxDia << "." << endl;
         }
     } while (dia < 1 || dia > maxDia);

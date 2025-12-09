@@ -1,5 +1,9 @@
 #pragma once
 #include "TurnoArchivo.h"
+#include "MedicoArchivo.h"
+#include "EspecialidadArchivo.h"
+#include "ObraSocialArchivo.h"
+#include "ConsultorioArchivo.h"
 
 class TurnoManager{
 public:
@@ -22,6 +26,13 @@ public:
     void consultarMedico();
     void consultarPaciente();
     void consultarEstado();
+
+    void marcarTurnoAtendido();
+
 private:
     TurnoArchivo _repo;
+    MedicoArchivo _repoMedico;
+    EspecialidadArchivo _repoEspecialidad;
+    ObraSocialArchivo _repoObraSocial;
+    ConsultorioArchivo _repoConsultorio;
 };
