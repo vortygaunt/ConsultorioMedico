@@ -106,6 +106,9 @@ int  TurnoArchivo::getNuevoID(){
 
 void TurnoArchivo::vaciarArchivo(){
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+    if(pFile == nullptr){
+        return;
+    }
 
     fclose(pFile);
 }

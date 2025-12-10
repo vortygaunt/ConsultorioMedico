@@ -111,7 +111,7 @@ using namespace std;
 
         for(int i= 0; i < cantidad; i++){
             registro = leer(i);
-            if(registro.getNumeroConsultorio() == numero){
+            if(registro.getNumeroConsultorio() == numero && registro.getEstado() == true){
                 return true;
             }
         }
@@ -195,6 +195,9 @@ using namespace std;
 
     void ConsultorioArchivo::vaciarArchivo(){
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        if(pFile == nullptr){
+            return;
+        }
         fclose(pFile);
     }
 

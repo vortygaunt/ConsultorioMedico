@@ -45,4 +45,5 @@ bool Especialidad::getEstado(){
 void Especialidad::mostrar(){
     cout << "Codigo de especialidad: " << _codigoEspecialidad << endl;
     cout << "Descripcion: " << _descripcion << endl;
+    cout << "-----------------------------------------" << endl;
 }

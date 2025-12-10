@@ -14,7 +14,7 @@ Paciente::Paciente(): _codigoObraSocial(0), _fechaNacimiento(), _direccion(), _e
 
 }
 
-Paciente::Paciente(std::string dniPaciente, std::string nombre, std::string apellido, std::string telefono, PacienteDireccion direccion, std::string email, int codObraSocial, Fecha fecha, bool estado)
+Paciente::Paciente(string dniPaciente, string nombre, string apellido, string telefono, PacienteDireccion direccion, string email, int codObraSocial, Fecha fecha, bool estado)
 {
     setDniPaciente(dniPaciente);
     setNombrePaciente(nombre);

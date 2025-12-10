@@ -3,7 +3,7 @@
 
 using namespace std;
 
-PacienteArchivo::PacienteArchivo(std::string nombreArchivo):_nombreArchivo(nombreArchivo) {
+PacienteArchivo::PacienteArchivo(string nombreArchivo):_nombreArchivo(nombreArchivo) {
 
 }
 
@@ -16,7 +16,7 @@ bool PacienteArchivo::guardar(Paciente registro) {
     pFile = fopen(_nombreArchivo.c_str(), "ab");
 
     if (pFile == nullptr){
-        std::cout << "No se pudo guardar el registro";
+
         return false;
     }
 
@@ -37,7 +37,6 @@ Paciente PacienteArchivo::leer(int pos) {
 
     pFile = fopen(_nombreArchivo.c_str(), "rb");
     if (pFile == nullptr){
-        std::cout << "No se pudo leer el registro";
         return reg;
     }
 
@@ -58,7 +57,6 @@ bool PacienteArchivo::modificar(int pos, Paciente& registro) {
 
     pFile = fopen(_nombreArchivo.c_str(), "rb+");
     if (pFile == nullptr) {
-        std::cout << "No se pudo modificar el registro";
         return false;
     }
 
@@ -137,6 +135,9 @@ int PacienteArchivo::buscarPosPorDni(string& dniBuscado)
 
 void PacienteArchivo::vaciarArchivo() {
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        if(pFile == nullptr){
+            return;
+        }
         fclose(pFile);
     }
 

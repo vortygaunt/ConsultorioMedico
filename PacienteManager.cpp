@@ -344,16 +344,6 @@ void PacienteManager::eliminarPaciente()
     cout << "Paciente encontrado: " << endl;
     paciente.mostrar();
 
-
-    /*cout << "¿Desea eliminar este paciente? (S/N): ";
-    cin >> confirmar;
-
-    if (confirmar != 'S' && confirmar != 'N') {
-        cout << "Operación cancelada.";
-        return;
-    }*/
-
-
     paciente.setEstadoPaciente(false);
 
 

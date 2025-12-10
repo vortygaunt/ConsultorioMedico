@@ -121,7 +121,9 @@ int EspecialidadArchivo::getCantidadRegistro(){
 
 void EspecialidadArchivo::vaciarArchivo(){
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
-
+    if(pFile == nullptr){
+        return;
+    }
     fclose(pFile);
 }
 

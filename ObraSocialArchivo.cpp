@@ -125,6 +125,9 @@ using namespace std;
 
     void ObraSocialArchivo::vaciarArchivo(){
         FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+        if(pFile == nullptr){
+            return;
+        }
         fclose(pFile);
     }
 

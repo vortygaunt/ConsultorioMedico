@@ -51,4 +51,5 @@ using namespace std;
         cout << "ID de la obra social: " << _idObraSocial << endl;
         cout << "Nombre: " << _nombre << endl;
         cout << "Telefono: " << _telefonoObraSocial << endl;
+        cout << "------------------------------------" << endl;
     }

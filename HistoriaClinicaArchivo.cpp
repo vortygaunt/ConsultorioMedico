@@ -2,7 +2,7 @@
 #include "HistoriaClinicaArchivo.h"
 
 using namespace std;
-HistoriaClinicaArchivo::HistoriaClinicaArchivo(std::string nombreArchivo):_nombreArchivo(nombreArchivo){
+HistoriaClinicaArchivo::HistoriaClinicaArchivo(string nombreArchivo):_nombreArchivo(nombreArchivo){
 
 }
 
@@ -13,7 +13,6 @@ bool HistoriaClinicaArchivo::guardar(HistoriaClinica registro) {
     pFile = fopen(_nombreArchivo.c_str(), "ab");
 
     if (pFile == nullptr){
-        std::cout << "No se pudo guardar el registro";
         return false;
     }
 
@@ -33,7 +32,6 @@ HistoriaClinica HistoriaClinicaArchivo::leer(int pos) {
 
     pFile = fopen(_nombreArchivo.c_str(), "rb");
     if (pFile == nullptr){
-        std::cout << "No se pudo leer el registro";
         return reg;
     }
 
@@ -55,7 +53,6 @@ bool HistoriaClinicaArchivo::modificar(int pos, HistoriaClinica &registro) {
 
     pFile = fopen(_nombreArchivo.c_str(), "rb+");
     if (pFile == nullptr) {
-        std::cout << "No se pudo modificar el registro";
         return false;
     }
 
@@ -87,7 +84,7 @@ int HistoriaClinicaArchivo::getNuevoID(){
     return getCantidadRegistro() + 1;
     }
 
-int HistoriaClinicaArchivo::buscarPosPorDni(const std::string &dniBuscado) {
+int HistoriaClinicaArchivo::buscarPosPorDni(const string &dniBuscado) {
     int cantidad = getCantidadRegistro();
     if(cantidad == 0){
         return -1;
@@ -106,6 +103,9 @@ int HistoriaClinicaArchivo::buscarPosPorDni(const std::string &dniBuscado) {
 
 void HistoriaClinicaArchivo::vaciarArchivo() {
     FILE *pFile = fopen(_nombreArchivo.c_str(), "wb");
+    if(pFile == nullptr){
+        return;
+    }
     fclose(pFile);
 }
 

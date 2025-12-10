@@ -74,4 +74,5 @@ using namespace std;
         }else{
             cout << "ID del medico que ocupa el consultorio: --- " << endl;
         }
+        cout << "------------------------------------------------" << endl;
     }

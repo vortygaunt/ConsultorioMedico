@@ -13,7 +13,7 @@ HistoriaClinica::HistoriaClinica(): _id(0), _fecha(), _idObraSocial(0), _estado 
     _tratamiento[0] = '\0';
 }
 
-HistoriaClinica::HistoriaClinica(int id, std::string dniPaciente, std::string dniMedico, Fecha fecha, std::string diagnostico, std::string observaciones, std::string tratamiento, int idObraSocial,bool estado)
+HistoriaClinica::HistoriaClinica(int id, string dniPaciente, string dniMedico, Fecha fecha, string diagnostico, string observaciones, string tratamiento, int idObraSocial,bool estado)
 {
     setId(id);
     setDniPaciente(dniPaciente);
@@ -30,12 +30,12 @@ void HistoriaClinica::setId(int id){
     _id = id;
 }
 
-void HistoriaClinica::setDniPaciente(std::string dniP){
+void HistoriaClinica::setDniPaciente(string dniP){
     strncpy(_dniPaciente, dniP.c_str(), 11);
     _dniPaciente[11] = '\0';
 }
 
-void HistoriaClinica::setDniMedico(std::string dniM){
+void HistoriaClinica::setDniMedico(string dniM){
     strncpy(_dniMedico, dniM.c_str(), 11);
     _dniMedico[11] = '\0';
 }
@@ -44,17 +44,17 @@ void HistoriaClinica::setFecha(Fecha fecha){
     _fecha = fecha;
 }
 
-void HistoriaClinica::setDiagnostico(std::string diagnostico){
+void HistoriaClinica::setDiagnostico(string diagnostico){
     strncpy(_diagnostico, diagnostico.c_str(), 99);
     _diagnostico[99] = '\0';
 }
 
-void HistoriaClinica::setObservaciones(std::string observaciones){
+void HistoriaClinica::setObservaciones(string observaciones){
     strncpy(_observaciones, observaciones.c_str(), 99);
     _observaciones[99] = '\0';
 }
 
-void HistoriaClinica::setTratamiento(std::string tratamiento){
+void HistoriaClinica::setTratamiento(string tratamiento){
     strncpy(_tratamiento, tratamiento.c_str(), 99);
     _tratamiento[99] = '\0';
 }
@@ -74,28 +74,28 @@ int HistoriaClinica::getId(){
     return _id;
 }
 
-std::string HistoriaClinica::getDniPaciente(){
-    return std::string(_dniPaciente);
+string HistoriaClinica::getDniPaciente(){
+    return string(_dniPaciente);
 }
 
-std::string HistoriaClinica::getDniMedico(){
-    return std::string(_dniMedico);
+string HistoriaClinica::getDniMedico(){
+    return string(_dniMedico);
 }
 
 Fecha HistoriaClinica::getFecha(){
     return _fecha;
 }
 
-std::string HistoriaClinica::getDiagnostico(){
-    return std::string(_diagnostico);
+string HistoriaClinica::getDiagnostico(){
+    return string(_diagnostico);
 }
 
-std::string HistoriaClinica::getObservaciones(){
-    return std::string(_observaciones);
+string HistoriaClinica::getObservaciones(){
+    return string(_observaciones);
 }
 
-std::string HistoriaClinica::getTratamiento(){
-    return std::string(_tratamiento);
+string HistoriaClinica::getTratamiento(){
+    return string(_tratamiento);
 }
 
 int HistoriaClinica::getIdObraSocial(){

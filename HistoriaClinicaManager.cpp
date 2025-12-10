@@ -211,7 +211,7 @@ void HistoriaClinicaManager::modificarObservaciones()
     historia.mostrar();
 
 
-    cout << "Ingrese las nuevas observaciones: "; //sobreescribe las observaciones
+    cout << "Ingrese las nuevas observaciones: ";
     nuevasObservaciones = cargarCadena();
 
     historia.setObservaciones(nuevasObservaciones);
@@ -339,11 +339,14 @@ void HistoriaClinicaManager::consultarDniPaciente()
 void HistoriaClinicaManager::consultarFechaHC()
 {
     Fecha fecha;
+    int cantidad = _repo.getCantidadRegistro();
+    if(cantidad == 0){
+        cout << "No hay registros en el archivo." << endl;
+    }
 
     cout << "INGRESE LA FECHA DE LA HISTORIA CLINICA A CONSULTAR: " << endl;
     fecha.cargar();
 
-    int cantidad = _repo.getCantidadRegistro();
     bool encontrado = false;
 
 
@@ -352,10 +355,7 @@ void HistoriaClinicaManager::consultarFechaHC()
 
         if (reg.getEstado()) {
 
-            Fecha f = reg.getFecha();
-            if (f.getDia() == fecha.getDia() &&
-                f.getMes() == fecha.getMes() &&
-                f.getAnio() == fecha.getAnio())
+            if (fecha == reg.getFecha())
             {
                 if (!encontrado) {
                     cout << "--- PACIENTES CON MISMA FECHA DE HISTORIA CLINICA ---" << endl;
